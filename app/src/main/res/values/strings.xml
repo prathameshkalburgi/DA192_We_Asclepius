@@ -67,4 +67,5 @@
     <string name="enter_correct_adhar_number">Please enter correct aadhar number</string>
     <string name="please_select_gender">Please select gender</string>
     <string name="please_select_relation_type">Please select relation type</string>
+    <string name="yours">"Your "</string>
 </resources>

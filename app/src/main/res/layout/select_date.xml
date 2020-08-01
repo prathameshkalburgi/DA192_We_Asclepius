@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/selectedCard"
+        layout="@layout/selected_item"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/datePickerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/large_padding"
+            android:layout_marginTop="@dimen/large_padding"
+            android:layout_marginBottom="@dimen/standard_padding"
+            android:text="@string/select_appointment_date"
+            android:textAppearance="@style/TextAppearance.Custom.Subtitle1"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="3">
+
+            <NumberPicker
+                android:id="@+id/day"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/standard_padding"
+                android:layout_weight="1" />
+
+            <NumberPicker
+                android:id="@+id/month"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/standard_padding"
+                android:layout_weight="1" />
+
+            <NumberPicker
+                android:id="@+id/year"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/standard_padding"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dateNext"
+            android:layout_width="220dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/large_padding"
+            android:text="@string/next"
+            android:textColor="@color/colorPrimary"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="@dimen/standard_padding"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="2dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
