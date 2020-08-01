@@ -1,10 +1,12 @@
 package `in`.asclepius.app.activities
 
 import `in`.asclepius.app.R
+import `in`.asclepius.app.`interface`.PatientSelectedCallback
 import `in`.asclepius.app.adapters.MemberAdapter
 import `in`.asclepius.app.databinding.ActivityBookAppointmentBinding
 import `in`.asclepius.app.models.AppUser
 import `in`.asclepius.app.others.Constants
+import `in`.asclepius.app.others.SharedPrefsManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -14,13 +16,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class BookAppointment : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var memberAdapter: MemberAdapter
     lateinit var binding: ActivityBookAppointmentBinding
     lateinit var mContext: Context
     lateinit var specializationSheet: BottomSheetBehavior<View>
@@ -29,8 +29,12 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
     lateinit var timeSelectionSheet: BottomSheetBehavior<View>
     val database = FirebaseDatabase.getInstance()
     val userMembersReference = database.getReference(Constants.USER_MEMBERS_REFERENCE)
+    val userReference = database.getReference(Constants.USER_DATABASE_REFERENCE)
     val firebaseUser = FirebaseAuth.getInstance().currentUser
     val userMembers = mutableListOf<AppUser>()
+    lateinit var selectedPatient: AppUser
+    lateinit var sharedPrefsManager: SharedPrefsManager
+    lateinit var signedInUser: AppUser
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +44,8 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         mContext = this
+
+        sharedPrefsManager = SharedPrefsManager(this)
 
         /* binding.selectPatient.firstPatientCard.setOnClickListener(View.OnClickListener {
             setPatientSelected()
@@ -53,8 +59,11 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
             setDateSelected()
         })
 
-        setPatientsRV()
 
+        binding.selectPatient.loadingView.root.visibility = View.VISIBLE
+        binding.selectPatient.loadingView.title.text = "Getting family members data"
+
+        setSelfCard()
         specializationSheet = BottomSheetBehavior.from(binding.specialitySheet)
         selectPatientSheet = BottomSheetBehavior.from(binding.patientSheet)
         dateSelectionSheet = BottomSheetBehavior.from(binding.dateAndTimeSheet)
@@ -78,10 +87,21 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
 
     private fun setPatientSelected() {
         binding.selectPatient.selectedCard.root.visibility = View.VISIBLE
-        //binding.selectPatient.patientsLayout.visibility=View.GONE
+        binding.selectPatient.patientsLayout.visibility = View.GONE
         specializationSheet.state = BottomSheetBehavior.STATE_EXPANDED
         binding.specialitySheetLayout.visibility = View.VISIBLE
         selectPatientSheet.isHideable = false
+        binding.selectPatient.selectedCard.selectedAttribute.text =
+            getString(R.string.patient_selected)
+        binding.selectPatient.selectedCard.selectedValue.text = selectedPatient.fullName
+
+        binding.selectPatient.selectedCard.edit.setOnClickListener(View.OnClickListener {
+            binding.selectPatient.selectedCard.root.visibility = View.GONE
+            binding.selectPatient.patientsLayout.visibility = View.VISIBLE
+            dateSelectionSheet.state = BottomSheetBehavior.STATE_HIDDEN
+            specializationSheet.state = BottomSheetBehavior.STATE_HIDDEN
+            timeSelectionSheet.state = BottomSheetBehavior.STATE_HIDDEN
+        })
     }
 
     private fun setSpecialitySelected() {
@@ -135,7 +155,15 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setPatientsAdapter() {
-        val memberAdapter = MemberAdapter(userMembers, this)
+        binding.selectPatient.loadingView.root.visibility = View.GONE
+        memberAdapter = MemberAdapter(userMembers, this, object : PatientSelectedCallback {
+            override fun onPatientSelected(patient: AppUser) {
+                selectedPatient = patient
+                memberAdapter.selectedPatient = patient
+                memberAdapter.notifyDataSetChanged()
+                setPatientSelected()
+            }
+        })
         binding.selectPatient.patientsRV.layoutManager = LinearLayoutManager(this)
         binding.selectPatient.patientsRV.adapter = memberAdapter
     }
@@ -150,5 +178,24 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         startActivity(Intent(this, AddFamilyMember::class.java))
     }
 
+    private fun setSelfCard() {
+        firebaseUser?.uid?.let {
+            userReference.child(it).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    signedInUser = snapshot.getValue(AppUser::class.java)!!
+                    signedInUser?.let { it1 ->
+                        userMembers.add(it1)
+                        setPatientsRV()
+                    }
+                }
+            })
+        }
+
+
+    }
 
 }
