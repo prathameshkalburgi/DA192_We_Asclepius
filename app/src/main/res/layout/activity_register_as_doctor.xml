@@ -14,7 +14,6 @@
         app:lottie_rawRes="@raw/waiting_doctors_anim" />
 
     <com.google.android.material.card.MaterialCardView
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/large_padding"

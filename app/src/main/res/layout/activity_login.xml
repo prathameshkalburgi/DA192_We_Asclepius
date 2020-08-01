@@ -171,11 +171,24 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="45dp"
                         android:textAppearance="@style/TextAppearance.Custom.Button"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                 </RelativeLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/loginAsEmployee"
+                android:layout_width="220dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/standard_padding"
+                android:text="@string/organization_employee_login"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="@dimen/standard_padding"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp" />
 
         </LinearLayout>
 

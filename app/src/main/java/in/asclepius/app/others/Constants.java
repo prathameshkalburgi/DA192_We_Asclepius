@@ -2,6 +2,7 @@ package in.asclepius.app.others;
 
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Constants {
 
@@ -21,4 +22,8 @@ public class Constants {
     public static final String SHARED_PREFS = "shared_prefs_file";
     @NotNull
     public static final String USER_NAME = "UserName";
+
+    @Nullable
+    public static final String USER_TYPE = "USER_ROLE_TYPE";
+    public static String[] ADMIN_ROLES = new String[]{"Please Select Role", "Super Admin", "Organizational Head", "Doctor"};
 }
