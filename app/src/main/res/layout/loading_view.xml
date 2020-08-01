@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="4dp"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        app:cardCornerRadius="@dimen/standard_padding"
+        android:minWidth="180dp"
+        android:elevation="@dimen/standard_padding"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="60dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading"
+                android:layout_gravity="center"
+                app:lottie_colorFilter="@color/colorPrimary"
+                app:lottie_speed="1.5"
+                android:layout_height="60dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Loading"
+                android:textStyle="bold"
+                android:padding="@dimen/standard_padding"
+                android:id="@+id/title"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/standard_padding"
+                android:textColor="@color/black"
+                android:layout_marginRight="@dimen/standard_padding"
+                android:textAppearance="@style/TextAppearance.Custom.Caption"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>
