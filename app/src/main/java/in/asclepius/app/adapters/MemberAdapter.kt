@@ -76,9 +76,6 @@ class MemberAdapter(
             holder.binding.memberAgeCard.visibility = View.GONE
         }
 
-        if (member.relationType == null) {
-            holder.binding.relationCard.visibility = View.INVISIBLE
-        }
 
         holder.binding.root.setOnClickListener(View.OnClickListener {
             callback.onPatientSelected(member)

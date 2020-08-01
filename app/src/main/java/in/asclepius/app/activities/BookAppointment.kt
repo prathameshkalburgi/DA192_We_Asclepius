@@ -60,6 +60,8 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         })
 
 
+        binding.toolbarCard.toolbar.title = getString(R.string.bookAppointmentNow)
+
         binding.selectPatient.loadingView.root.visibility = View.VISIBLE
         binding.selectPatient.loadingView.title.text = "Getting family members data"
 
@@ -126,6 +128,8 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setPatientsRV() {
+        setPatientsAdapter()
+
         firebaseUser?.uid?.let {
             userMembersReference.child(it).addChildEventListener(object : ChildEventListener {
                 override fun onCancelled(error: DatabaseError) {
