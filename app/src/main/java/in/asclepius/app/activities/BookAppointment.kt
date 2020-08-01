@@ -149,13 +149,11 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
                     user?.let { it1 -> userMembers.add(it1) }
                     setPatientsAdapter()
                 }
-
                 override fun onChildRemoved(snapshot: DataSnapshot) {
                     TODO("Not yet implemented")
                 }
             })
         }
-
     }
 
     private fun setPatientsAdapter() {
