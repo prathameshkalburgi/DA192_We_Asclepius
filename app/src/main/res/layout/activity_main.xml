@@ -1,18 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include layout="@layout/toolbar_card"
+        android:id="@+id/toolbarCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/standard_padding"
+        android:layout_marginTop="@dimen/standard_padding"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/white"
+        android:layout_marginRight="@dimen/standard_padding"
+        app:cardElevation="@dimen/standard_padding"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:paddingTop="@dimen/standard_padding"
+            android:paddingLeft="@dimen/large_padding"
+            android:paddingBottom="@dimen/standard_padding"
+            android:paddingRight="@dimen/large_padding"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="@string/welcome"
+                android:id="@+id/welcomeText"
+                android:textAppearance="@style/TextAppearance.Custom.Subtitle1"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="@string/welcome"
+                android:layout_below="@id/welcomeText"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/standard_padding"
+                android:textAppearance="@style/TextAppearance.Custom.Headline5"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="60dp"
+                android:src="@drawable/google_icon"
+                app:shapeAppearance="@style/circleImageView"
+                android:layout_alignParentEnd="true"
+                android:layout_height="60dp"/>
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/standard_padding"
+        app:cardElevation="@dimen/standard_padding"
+        app:cardBackgroundColor="@color/white"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="@string/whatDoYouWantToDoToday"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/large_padding"
+                android:layout_marginLeft="@dimen/large_padding"
+                android:layout_marginBottom="@dimen/standard_padding"
+                android:textAppearance="@style/TextAppearance.Custom.Subtitle1"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/standard_padding"
+                app:cardBackgroundColor="#9C9FE7"
+                android:id="@+id/bookAppointmentCard"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/standard_padding"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="@string/bookAppointmentNow"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:gravity="center_vertical"
+                        android:layout_toLeftOf="@id/feature_img"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:layout_height="@dimen/feature_card_height"/>
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:src="@drawable/doctors_vector"
+                        android:id="@+id/feature_img"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="@dimen/feature_card_height"/>
+
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/standard_padding"
+                app:cardBackgroundColor="#FBB562"
+                android:foreground="@color/colorAccent"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/standard_padding"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="@string/bookTeleConsultation"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:gravity="center_vertical"
+                        android:layout_toLeftOf="@id/feature_img2"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:layout_height="@dimen/feature_card_height"/>
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:src="@drawable/tele_consultation"
+                        android:id="@+id/feature_img2"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="@dimen/feature_card_height"/>
+
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/standard_padding"
+                app:cardBackgroundColor="@color/colorAccent"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/standard_padding"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="@string/search_hospitals"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:gravity="center_vertical"
+                        android:layout_toLeftOf="@id/feature_img3"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:layout_height="@dimen/feature_card_height"/>
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:src="@drawable/search_hospitals"
+                        android:id="@+id/feature_img3"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="@dimen/feature_card_height"/>
+
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/standard_padding"
+                app:cardBackgroundColor="#629FFB"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/standard_padding"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="@string/checkLabReports"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:gravity="center_vertical"
+                        android:layout_toLeftOf="@id/feature_img4"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:layout_height="@dimen/feature_card_height"/>
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:src="@drawable/lab_reports"
+                        android:id="@+id/feature_img4"
+                        android:layout_alignParentEnd="true"
+                        android:layout_height="@dimen/feature_card_height"/>
+
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</LinearLayout>
