@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineOPDApplication">
+        <activity android:name=".activities.AddFamilyMember"></activity>
+        <activity android:name=".activities.VerifyMobileNumber" />
+        <activity android:name=".activities.BookAppointment" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.CreateAccount" />
+        <activity android:name=".activities.OnBoardActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
