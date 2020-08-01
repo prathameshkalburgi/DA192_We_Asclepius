@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/large_padding"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="8dp"
+    app:strokeColor="@color/colorPrimary"
+    app:strokeWidth="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/image"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
+            android:layout_width="170dp"
+            android:layout_height="@dimen/on_board_img_size"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/large_padding"
+            />
+
+        <TextView
+            android:id="@+id/feature_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_padding"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:padding="@dimen/large_padding"
+            android:text="@string/on_board_message_one"
+            android:textAppearance="@style/TextAppearance.Custom.Subtitle1"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/selectors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/f1"
+                android:layout_width="@dimen/oval_shape_size"
+                android:layout_height="@dimen/oval_shape_size"
+                android:layout_marginLeft="@dimen/standard_padding"
+                android:background="@drawable/circle" />
+
+            <ImageView
+                android:id="@+id/f2"
+                android:layout_width="@dimen/oval_shape_size"
+                android:layout_height="@dimen/oval_shape_size"
+                android:layout_marginLeft="@dimen/standard_padding"
+                android:background="@drawable/circle" />
+
+            <ImageView
+                android:id="@+id/f3"
+                android:layout_width="@dimen/oval_shape_size"
+                android:layout_height="@dimen/oval_shape_size"
+                android:layout_marginLeft="@dimen/standard_padding"
+                android:background="@drawable/circle" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
