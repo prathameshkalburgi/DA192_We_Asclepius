@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "969052269767",
+    "firebase_url": "https://online-opd-sih-finale-app.firebaseio.com",
+    "project_id": "online-opd-sih-finale-app",
+    "storage_bucket": "online-opd-sih-finale-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969052269767:android:73114446f869b491cde2e2",
+        "android_client_info": {
+          "package_name": "in.asclepius.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969052269767-vs73lo3hu2qeua2h93j7vg62up0ftti8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.asclepius.app",
+            "certificate_hash": "4f3a7fe0280ec82d20039ca3692d1c35a65edca4"
+          }
+        },
+        {
+          "client_id": "969052269767-dqdj3vj3dfgc5214408te67ugko8d5mt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOn7P35N33s2LN0ComvyTmWBNA_i6Io2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969052269767-dqdj3vj3dfgc5214408te67ugko8d5mt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
