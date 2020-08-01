@@ -1,14 +1,15 @@
 package `in`.asclepius.app.activities
 
-import `in`.asclepius.app.R
+import `in`.asclepius.app.MainActivity
 import `in`.asclepius.app.adapters.OnBoardPagerAdapter
 import `in`.asclepius.app.databinding.ActivityOnBoardBinding
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.google.firebase.auth.FirebaseAuth
 
 
 class OnBoardActivity : AppCompatActivity() {
@@ -46,9 +47,9 @@ class OnBoardActivity : AppCompatActivity() {
                 {
                     binding.nextFab.visibility= View.GONE
                     binding.getStarted.visibility= View.VISIBLE
-                }else{
-                    binding.nextFab.visibility= View.VISIBLE
-                    binding.getStarted.visibility= View.GONE
+                } else {
+                    binding.nextFab.visibility = View.VISIBLE
+                    binding.getStarted.visibility = View.GONE
                 }
             }
         })
@@ -56,5 +57,10 @@ class OnBoardActivity : AppCompatActivity() {
     }
 
 
-
+    override fun onStart() {
+        super.onStart()
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+    }
 }
