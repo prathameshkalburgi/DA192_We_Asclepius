@@ -77,5 +77,9 @@
     <string name="note_for_registerants">Note : You will receive updates about your application to this email. Make sure you provide valid email</string>
     <string name="choose_resume_file">Choose resume file</string>
     <string name="upload_resume">Upload Resume</string>
+    <string name="please_enter_correct_email_and_choose_resume">Please make sure you have entered correct email. And chosen a resume pdf</string>
+    <string name="uploading_details">Uploading Details</string>
+    <string name="thankYou">Thank you</string>
+    <string name="responseRecorded">Your response recorded. We will get back to you in 7-15 days</string>
 
 </resources>

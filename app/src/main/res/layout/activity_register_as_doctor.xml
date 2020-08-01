@@ -14,7 +14,7 @@
         app:lottie_rawRes="@raw/waiting_doctors_anim" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/choose_resume_file"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/large_padding"
@@ -25,6 +25,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/normalLayout"
+            android:visibility="visible"
             android:orientation="vertical"
             android:padding="@dimen/standard_padding">
 
@@ -77,6 +79,7 @@
                 android:layout_height="50dp"
                 android:layout_margin="@dimen/large_padding"
                 app:strokeColor="@color/black"
+                android:id="@+id/choose_resume_file"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -90,6 +93,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:gravity="center"
+                        android:id="@+id/choose_text"
                         android:text="@string/choose_resume_file"
                         android:textAppearance="@style/TextAppearance.Custom.Body1" />
 
@@ -101,8 +105,43 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:id="@+id/upload"
                 android:layout_margin="@dimen/large_padding"
                 android:text="@string/upload_resume" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/success_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/standard_padding"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/standard_padding"
+                android:text="@string/thankYou"
+                android:textAppearance="@style/TextAppearance.Custom.Headline5"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/standard_padding"
+                android:textAppearance="@style/TextAppearance.Custom.Body1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/standard_padding"
+                android:text="@string/responseRecorded"
+                android:textAppearance="@style/TextAppearance.Custom.Body1" />
 
         </LinearLayout>
 
