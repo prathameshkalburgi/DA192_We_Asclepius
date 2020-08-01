@@ -1,10 +1,12 @@
 package `in`.asclepius.app.activities
 
+import `in`.asclepius.app.R
 import `in`.asclepius.app.adapters.MemberAdapter
 import `in`.asclepius.app.databinding.ActivityBookAppointmentBinding
 import `in`.asclepius.app.models.AppUser
 import `in`.asclepius.app.others.Constants
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -17,7 +19,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 
-class BookAppointment : AppCompatActivity() {
+class BookAppointment : AppCompatActivity(), View.OnClickListener {
 
     lateinit var binding: ActivityBookAppointmentBinding
     lateinit var mContext: Context
@@ -68,6 +70,8 @@ class BookAppointment : AppCompatActivity() {
         Handler().postDelayed(Runnable {
             selectPatientSheet.state = BottomSheetBehavior.STATE_EXPANDED
         }, 500);
+
+        binding.selectPatient.addNewMember.setOnClickListener(this)
 
     }
 
@@ -134,6 +138,16 @@ class BookAppointment : AppCompatActivity() {
         val memberAdapter = MemberAdapter(userMembers, this)
         binding.selectPatient.patientsRV.layoutManager = LinearLayoutManager(this)
         binding.selectPatient.patientsRV.adapter = memberAdapter
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.addNewMember -> addNewMember()
+        }
+    }
+
+    private fun addNewMember() {
+        startActivity(Intent(this, AddFamilyMember::class.java))
     }
 
 

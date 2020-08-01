@@ -40,6 +40,11 @@ class MemberAdapter(
         holder.binding.memberName.text = member.fullName
         holder.binding.realtionText.text =
             context.getString(R.string.yours) + " " + member.relationType
-        holder.binding.memberAge.text = context.getString(R.string.age) + " " + member.relationType
+        holder.binding.memberAge.text = context.getString(R.string.onlyAge) + " " + member.age
+        if (member.gender == "Male") {
+            holder.binding.genderIcon.setImageDrawable(context.getDrawable(R.drawable.male_icon))
+        } else {
+            holder.binding.genderIcon.setImageDrawable(context.getDrawable(R.drawable.female_icon))
+        }
     }
 }

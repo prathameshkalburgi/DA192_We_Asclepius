@@ -10,9 +10,37 @@
         layout="@layout/selected_item"
         android:visibility="gone" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/patientsRV"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/standard_padding"
+            android:padding="@dimen/standard_padding"
+            android:text="@string/select_patient"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/patientsRV"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addNewMember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/standard_padding"
+            android:layout_marginRight="@dimen/standard_padding"
+            android:drawableEnd="@drawable/ic_baseline_add_24"
+            android:drawableTint="@color/white"
+            android:text="@string/add_member" />
+
+    </LinearLayout>
 
 </LinearLayout>
