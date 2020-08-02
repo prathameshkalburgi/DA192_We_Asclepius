@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.PaymentGatewayActivity"></activity>
         <activity android:name=".activities.SeePendingApproval" />
-        <activity android:name=".activities.EmployeeLogin"></activity>
+        <activity android:name=".activities.EmployeeLogin" />
         <activity android:name=".activities.RegisterAsDoctor" />
         <activity android:name=".activities.AddFamilyMember" />
         <activity android:name=".activities.VerifyMobileNumber" />

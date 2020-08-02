@@ -6,11 +6,11 @@ class SharedPrefsManager(context: Context) {
     val sharedPreferences =
         context.getSharedPreferences(Constants.SHARED_PREFS, Context.MODE_PRIVATE)
 
-    public fun setString(value: String, key: String) {
+    public fun setString(key: String, value: String) {
         sharedPreferences.edit().putString(key, value).apply()
     }
 
-    public fun getString(defaultValue: String, key: String): String? {
+    public fun getString(key: String, defaultValue: String): String? {
         return sharedPreferences.getString(key, defaultValue)
     }
 

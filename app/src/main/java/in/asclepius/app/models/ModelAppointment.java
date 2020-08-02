@@ -3,6 +3,8 @@ package in.asclepius.app.models;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
+import org.jetbrains.annotations.NotNull;
+
 @IgnoreExtraProperties
 public class ModelAppointment {
 
@@ -10,17 +12,17 @@ public class ModelAppointment {
     private String bookingDate;
     private boolean isFeesPaid;
     private Doctors doctor;
-    private String opdDepartments;
+    private String department;
     private String status;
     private AppUser bookedBy;
 
 
-    public ModelAppointment(AppUser patient, String bookingDate, boolean isFeesPaid, Doctors doctor, String opdDepartments, String status, AppUser bookedBy) {
+    public ModelAppointment(AppUser patient, String bookingDate, boolean isFeesPaid, Doctors doctor, String department, String status, AppUser bookedBy) {
         this.patient = patient;
         this.bookingDate = bookingDate;
         this.isFeesPaid = isFeesPaid;
         this.doctor = doctor;
-        this.opdDepartments = opdDepartments;
+        this.department = department;
         this.status = status;
         this.bookedBy = bookedBy;
     }
@@ -70,12 +72,12 @@ public class ModelAppointment {
 
     @PropertyName("opdDepartment")
     public String getOpdDepartments() {
-        return opdDepartments;
+        return department;
     }
 
     @PropertyName("opdDepartment")
-    public void setOpdDepartments(String opdDepartments) {
-        this.opdDepartments = opdDepartments;
+    public void setOpdDepartments(String department) {
+        this.department = department;
     }
 
     @PropertyName("status")
@@ -96,5 +98,10 @@ public class ModelAppointment {
     @PropertyName("bookedBy")
     public void setBookedBy(AppUser bookedBy) {
         this.bookedBy = bookedBy;
+    }
+
+    @NotNull
+    public String getData() {
+        return "Name : " + patient.getFullName() + "\nAge : " + patient.getAge() + "\nBooked by : " + bookedBy.getFullName() + "\nStatus : " + status + "\n" + "Date : " + bookingDate;
     }
 }

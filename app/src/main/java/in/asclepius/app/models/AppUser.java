@@ -5,6 +5,8 @@ import android.util.Log;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
+import java.util.Random;
+
 @IgnoreExtraProperties
 public class AppUser {
 
@@ -105,6 +107,11 @@ public class AppUser {
 
     @PropertyName("age")
     public int getAge() {
+        if (age <= 0) {
+            Random da = new Random();
+            return da.nextInt(75);
+
+        }
         return age;
     }
 

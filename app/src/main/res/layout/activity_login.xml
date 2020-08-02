@@ -185,9 +185,9 @@
                 android:layout_marginTop="@dimen/standard_padding"
                 android:text="@string/organization_employee_login"
                 android:textColor="@color/white"
-                app:backgroundTint="@color/colorPrimary"
+                app:backgroundTint="@color/colorAccent"
                 app:cornerRadius="@dimen/standard_padding"
-                app:strokeColor="@color/colorPrimary"
+                app:strokeColor="@color/colorAccent"
                 app:strokeWidth="2dp" />
 
         </LinearLayout>

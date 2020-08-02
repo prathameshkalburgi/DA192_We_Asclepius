@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:id="@+id/normalUserLayout"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_margin="@dimen/standard_padding"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="@dimen/standard_padding">
@@ -200,18 +201,21 @@
         android:layout_margin="@dimen/standard_padding"
         app:cardElevation="@dimen/standard_padding"
         app:cardBackgroundColor="@color/white"
-        android:id="@+id/superAdminLayout"
-        android:visibility="gone"
-        android:layout_height="wrap_content">
+        android:id="@+id/doctorLayout"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:id="@+id/appointmentLayout"
             android:orientation="vertical"
+            android:visibility="visible"
             android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="match_parent"
-                android:text="@string/whatDoYouWantToDoToday"
+                android:text="@string/upcoming_appointments"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/large_padding"
                 android:layout_marginLeft="@dimen/large_padding"
@@ -222,79 +226,30 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/standard_padding"
-                app:cardBackgroundColor="#9C9FE7"
-                android:id="@+id/seePendingApprovals"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <RelativeLayout
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:padding="@dimen/standard_padding"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_toLeftOf="@id/approvalImage"
-                        android:layout_centerVertical="true"
-                        android:textStyle="bold"
-                        android:paddingLeft="@dimen/standard_padding"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="@dimen/standard_padding"
-                        android:gravity="center_vertical"
-                        android:text="@string/pendingApprovals"
-                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
-                        android:layout_height="@dimen/feature_card_height"/>
+                        android:id="@+id/appointmentContainer"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/standard_padding">
 
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:src="@drawable/doctors_vector"
-                        android:id="@+id/approvalImage"
-                        android:layout_alignParentEnd="true"
-                        android:layout_height="@dimen/feature_card_height"/>
 
-                </RelativeLayout>
+                    </LinearLayout>
+
+
+                </ScrollView>
+
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_margin="@dimen/standard_padding"
-                app:cardBackgroundColor="#FBB562"
-                android:foreground="@color/colorAccent"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:padding="@dimen/standard_padding"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/feature_card_height"
-                        android:layout_centerVertical="true"
-                        android:textStyle="bold"
-                        android:paddingLeft="@dimen/standard_padding"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="@dimen/standard_padding"
-                        android:gravity="center_vertical"
-                        android:layout_toLeftOf="@id/newsImage"
-                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
-                        android:text="@string/add_news" />
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:src="@drawable/tele_consultation"
-                        android:id="@+id/newsImage"
-                        android:layout_height="@dimen/feature_card_height"
-                        android:layout_alignParentEnd="true" />
-
-
-                </RelativeLayout>
-
-            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 

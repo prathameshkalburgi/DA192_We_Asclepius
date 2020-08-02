@@ -68,12 +68,14 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
             signUpUsingGoogle()
         })
 
+        binding.loginAsEmployee.setOnClickListener(this)
+
     }
 
     override fun onClick(v: View?) {
-        when(v?.id)
-        {
+        when (v?.id) {
             R.id.loginBtn -> loginUser()
+            R.id.loginAsEmployee -> startActivity(Intent(this, EmployeeLogin::class.java))
         }
     }
 

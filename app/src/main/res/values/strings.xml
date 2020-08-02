@@ -112,5 +112,8 @@
     <string name="choose_payment_method">Choose payment method</string>
     <string name="registration_successfull">Your appointment is successfully done. You can manger your appointments in the Manage Appointments Section</string>
     <string name="booking_appointment">Booking appointment please wait</string>
+    <string name="upcoming_appointments">Upcoming appointments</string>
+    <string name="registerAsDoctor">Register As Doctor</string>
+    <string name="getting_appointments">Getting Appointments</string>
 
 </resources>

@@ -9,11 +9,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 
-class EmployeeLogin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class EmployeeLogin : AppCompatActivity() {
 
     lateinit var binding: ActivityEmployeeLoginBinding
     var roleSelected: Boolean = false
@@ -22,51 +20,33 @@ class EmployeeLogin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         super.onCreate(savedInstanceState)
         binding = ActivityEmployeeLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setRoleAdapter()
+
 
         binding.loginBtn.setOnClickListener(View.OnClickListener {
             if (validateFields()) {
                 val dialog = LoadingDialog(this@EmployeeLogin)
                 dialog.show()
                 dialog.setTitle(getString(R.string.authenticating_user))
-
                 Handler().postDelayed(Runnable {
                     startActivity(
                         Intent(this@EmployeeLogin, MainActivity::class.java).putExtra(
                             Constants.USER_TYPE,
-                            binding.roleSpinner.selectedItem.toString()
+                            "DOCTOR"
                         )
                     )
                 }, 8000)
             }
         })
 
+        binding.registerAsDoctor.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this@EmployeeLogin, RegisterAsDoctor::class.java))
+        })
+
         binding.toolbarCard.toolbar.title = getString(R.string.organization_employee_login)
 
     }
 
-    private fun setRoleAdapter() {
-        var myAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, Constants.ADMIN_ROLES)
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        with(binding.roleSpinner)
-        {
-            adapter = myAdapter
-            setSelection(0, false)
-            onItemSelectedListener = this@EmployeeLogin
-            prompt = "Select your favourite language"
-        }
-
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-        roleSelected = false
-    }
-
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        roleSelected = position != 0
-    }
 
     private fun validateFields(): Boolean {
 
@@ -89,10 +69,10 @@ class EmployeeLogin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             return false
         }
 
-        if (!roleSelected) {
+        /*if (!roleSelected) {
             binding.pleaseSelectRole.visibility = View.VISIBLE
             return false
-        }
+        }*/
         return true
     }
 }
