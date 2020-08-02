@@ -55,6 +55,15 @@
                 android:text="@string/registration_successfull"
                 android:textAppearance="@style/TextAppearance.Custom.Body1" />
 
+            <TextView
+                android:id="@+id/idGeneratedText"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/standard_padding"
+                android:padding="@dimen/standard_padding"
+                android:textColor="@color/colorAccent"
+                android:textAppearance="@style/TextAppearance.Custom.Body1" />
+
 
         </LinearLayout>
 

@@ -19,7 +19,8 @@
         <TextView
             android:id="@+id/patientDetails"
             android:layout_width="match_parent"
-            android:textAppearance="@style/TextAppearance.Custom.Subtitle2"
+            android:text="test"
+            android:textSize="16sp"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:padding="@dimen/standard_padding" />
@@ -68,8 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_margin="@dimen/standard_padding"
             android:weightSum="2">
-
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_appointment"
@@ -89,6 +90,7 @@
                 android:layout_weight="1"
                 android:minHeight="60dp"
                 android:text="@string/reschedule"
+                android:layout_margin="@dimen/standard_padding"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 app:backgroundTint="#FFC107" />

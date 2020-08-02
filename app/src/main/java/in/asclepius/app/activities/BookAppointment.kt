@@ -105,6 +105,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
 
         binding.selectPatient.addNewMember.setOnClickListener(this)
 
+
     }
 
     private fun setDepartmentsAdapter() {
@@ -356,7 +357,6 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         dialog.show()
         dialog.setTitle(getString(R.string.booking_appointment))
 
-        Random.nextInt(0, 5000)
 
         var appointment = ModelAppointment(
             selectedPatient,
@@ -376,6 +376,8 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
                     dialog.dismiss()
                     binding.successLayout.successAnim.playAnimation()
                     binding.activityLayout.visibility = View.GONE
+                    binding.successLayout.idGeneratedText.text =
+                        appointment.appointmentId.toString() + " is your appointment id. Please keep this for further assistance"
                     binding.successLayout.successAnim.repeatCount = 0
                 }.addOnFailureListener {
                     dialog.dismiss()

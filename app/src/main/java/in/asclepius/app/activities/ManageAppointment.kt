@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 
+
 class ManageAppointment : AppCompatActivity() {
 
     private var selectedDateString: String? = null
@@ -39,7 +40,9 @@ class ManageAppointment : AppCompatActivity() {
         setContentView(binding.root)
         binding.loadingView.root.visibility = View.VISIBLE
         getAndSetAppointments()
+
     }
+
 
     private fun getAndSetAppointments() {
 
@@ -63,7 +66,10 @@ class ManageAppointment : AppCompatActivity() {
 
                     Log.d("ManageAppointment", "Appointments : " + snapshot.getValue())
                     try {
-                        appointmentList.add(snapshot.getValue(ModelAppointment::class.java)!!)
+                        val appointment = snapshot.getValue(ModelAppointment::class.java)!!
+                        if (appointment.status == "Active") {
+                            appointmentList.add(snapshot.getValue(ModelAppointment::class.java)!!)
+                        }
                         setAdapter()
                     } catch (e: Exception) {
                         showNoAppointments()
@@ -81,39 +87,45 @@ class ManageAppointment : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        appointmentList.reverse()
-        val rvAdapter = AppointmentsAdapter(
-            appointmentList as ArrayList<ModelAppointment>,
-            this,
-            object : AppointmentActions {
-                override fun onCancel(appointment: ModelAppointment) {
-                    confirmDailog = ConfirmCancellationDailog(
-                        this@ManageAppointment,
-                        object : AppointmentActions {
-                            override fun onCancel(appointment: ModelAppointment) {
-                                cancelAppointment(appointment)
-                            }
 
-                            override fun onReschedule(appointment: ModelAppointment) {
-                                showDatePicker(appointment)
-                            }
-                        },
-                        appointment
-                    )
+        if (appointmentList.size > 0) {
+            val rvAdapter = AppointmentsAdapter(
+                appointmentList as ArrayList<ModelAppointment>,
+                this,
+                object : AppointmentActions {
+                    override fun onCancel(appointment: ModelAppointment) {
+                        confirmDailog = ConfirmCancellationDailog(
+                            this@ManageAppointment,
+                            object : AppointmentActions {
+                                override fun onCancel(appointment: ModelAppointment) {
+                                    cancelAppointment(appointment)
+                                }
 
-                    confirmDailog.show()
-                }
+                                override fun onReschedule(appointment: ModelAppointment) {
 
-                override fun onReschedule(appointment: ModelAppointment) {
+                                }
+                            },
+                            appointment
+                        )
 
-                }
-            })
-        binding.loadingView.root.visibility = View.GONE
-        with(binding.appointmentsRV)
-        {
-            layoutManager = LinearLayoutManager(this@ManageAppointment)
-            adapter = rvAdapter
+                        confirmDailog.show()
+                    }
+
+                    override fun onReschedule(appointment: ModelAppointment) {
+                        showDatePicker(appointment)
+                    }
+                })
+            binding.loadingView.root.visibility = View.GONE
+            with(binding.appointmentsRV)
+            {
+                layoutManager = LinearLayoutManager(this@ManageAppointment)
+                adapter = rvAdapter
+            }
+        } else {
+            showNoAppointments()
         }
+
+
     }
 
     fun showDatePicker(appointment: ModelAppointment) {
@@ -161,8 +173,8 @@ class ManageAppointment : AppCompatActivity() {
         loadingDailog.setTitle(getString(R.string.rescheduling))
 
         firebaseUser?.uid?.let {
-            dbReference.child(it).child(appointment.appointmentId.toString()).child("status")
-                .setValue("Cancelled").addOnSuccessListener {
+            dbReference.child(it).child(appointment.appointmentId.toString()).child("bookingDate")
+                .setValue(rescheduledDate).addOnSuccessListener {
                     loadingDailog.dismiss()
                     getAndSetAppointments()
                     Toast.makeText(
