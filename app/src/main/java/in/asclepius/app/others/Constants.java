@@ -27,5 +27,7 @@ public class Constants {
     public static final String USER_TYPE = "USER_ROLE_TYPE";
     public static String[] ADMIN_ROLES = new String[]{"Please Select Role", "Super Admin", "Organizational Head", "Doctor"};
 
+    public static String[] DAYS_OF_WEEK = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Tuesday", "Friday", "Saturday", "Sunday"};
+
 
 }

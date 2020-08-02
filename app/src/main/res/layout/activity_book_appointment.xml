@@ -96,7 +96,7 @@
 
 
                 <include
-                    android:id="@+id/datePicker"
+                    android:id="@+id/selectDate"
                     layout="@layout/select_date" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -105,7 +105,7 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/timeSheetLayout"
+            android:id="@+id/doctorSheetLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbarCard"
@@ -113,7 +113,7 @@
             android:visibility="gone">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/timeSheet"
+                android:id="@+id/doctorSheet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/standard_padding"
@@ -127,8 +127,8 @@
 
 
                 <include
-                    android:id="@+id/timePicker"
-                    layout="@layout/select_time" />
+                    android:id="@+id/selectDoctor"
+                    layout="@layout/select_doctor" />
 
             </com.google.android.material.card.MaterialCardView>
 
