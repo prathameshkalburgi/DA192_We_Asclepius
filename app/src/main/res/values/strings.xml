@@ -97,5 +97,8 @@
     <string name="selected_department_and_speciality">"Selected department and speciality "</string>
     <string name="department">"Department "</string>
     <string name="choose_date">Choose date</string>
+    <string name="debit_card_payment">Debit Card Payment</string>
+    <string name="wallet_payment">Wallet Payment</string>
+    <string name="upi">UPI</string>
 
 </resources>
