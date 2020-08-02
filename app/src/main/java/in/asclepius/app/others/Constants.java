@@ -30,4 +30,6 @@ public class Constants {
     public static String[] DAYS_OF_WEEK = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Tuesday", "Friday", "Saturday", "Sunday"};
 
 
+    @NotNull
+    public static final String APPOINTMENTS = "appointments";
 }

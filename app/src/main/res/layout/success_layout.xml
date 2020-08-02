@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context=".activities.RegisterAsDoctor">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/success_anim"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/very_large_padding"
+        app:lottie_rawRes="@raw/check_mark_anim" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/large_padding"
+        app:cardCornerRadius="@dimen/standard_padding"
+        app:cardElevation="@dimen/standard_padding">
+
+        <LinearLayout
+            android:id="@+id/normalLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_padding"
+            android:orientation="vertical"
+            android:padding="@dimen/standard_padding"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/standard_padding"
+                android:text="@string/thankYou"
+                android:textAppearance="@style/TextAppearance.Custom.Headline5"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/standard_padding"
+                android:text="@string/registrationMessage"
+                android:textAppearance="@style/TextAppearance.Custom.Body1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/standard_padding"
+                android:text="@string/registration_successfull"
+                android:textAppearance="@style/TextAppearance.Custom.Body1" />
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

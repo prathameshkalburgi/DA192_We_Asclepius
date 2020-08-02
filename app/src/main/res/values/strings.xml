@@ -104,5 +104,13 @@
     <string name="phone_pe">Phone Pe</string>
     <string name="paytm">PayTM</string>
     <string name="select_doctor">Select Doctor</string>
+    <string name="doctor_selected">"Doctor selected "</string>
+    <string name="pay_and_book">Pay Online</string>
+    <string name="justBook">Pay At Clinic</string>
+    <string name="booking_note">You can pay the appointment fees now or you can also pay when you visit hospital.</string>
+    <string name="confirm_booking">Confirm appointment</string>
+    <string name="choose_payment_method">Choose payment method</string>
+    <string name="registration_successfull">Your appointment is successfully done. You can manger your appointments in the Manage Appointments Section</string>
+    <string name="booking_appointment">Booking appointment please wait</string>
 
 </resources>

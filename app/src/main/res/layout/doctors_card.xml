@@ -46,7 +46,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/experienceCard"
@@ -70,6 +70,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/ratingCard"
                     android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/standard_padding"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/standard_padding"
                     android:layout_marginRight="@dimen/standard_padding"

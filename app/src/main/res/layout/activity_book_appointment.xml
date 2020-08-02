@@ -8,8 +8,18 @@
     android:weightSum="10"
     tools:context=".activities.BookAppointment">
 
+    <include
+        android:id="@+id/success_layout"
+        layout="@layout/success_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/activity_layout"
         android:layout_height="wrap_content">
 
         <include
@@ -94,7 +104,6 @@
                 app:strokeColor="@color/colorPrimary"
                 app:strokeWidth="2dp">
 
-
                 <include
                     android:id="@+id/selectDate"
                     layout="@layout/select_date" />
@@ -129,6 +138,36 @@
                 <include
                     android:id="@+id/selectDoctor"
                     layout="@layout/select_doctor" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/bookAppointmentCard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbarCard"
+            android:layout_marginTop="300dp"
+            android:visibility="visible">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/bookAppointmentSheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/standard_padding"
+                android:layout_marginRight="@dimen/standard_padding"
+                app:behavior_hideable="true"
+                app:behavior_peekHeight="25dp"
+                app:cardCornerRadius="@dimen/book_appointment_card_radius"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp">
+
+
+                <include
+                    android:id="@+id/selectModeOfPayment"
+                    layout="@layout/confirm_book_layout" />
 
             </com.google.android.material.card.MaterialCardView>
 

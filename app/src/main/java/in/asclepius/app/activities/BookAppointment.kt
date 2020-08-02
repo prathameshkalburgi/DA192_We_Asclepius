@@ -2,10 +2,12 @@ package `in`.asclepius.app.activities
 
 import `in`.asclepius.app.R
 import `in`.asclepius.app.`interface`.OnDepartmentSelected
+import `in`.asclepius.app.`interface`.OnDoctorSelectedCallback
 import `in`.asclepius.app.`interface`.PatientSelectedCallback
 import `in`.asclepius.app.adapters.DepartmentsAdapter
 import `in`.asclepius.app.adapters.DoctorsAdapter
 import `in`.asclepius.app.adapters.MemberAdapter
+import `in`.asclepius.app.dailogs.LoadingDialog
 import `in`.asclepius.app.databinding.ActivityBookAppointmentBinding
 import `in`.asclepius.app.models.AppUser
 import `in`.asclepius.app.models.DepartmentModel
@@ -42,6 +44,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
     lateinit var selectPatientSheet: BottomSheetBehavior<View>
     lateinit var dateSelectionSheet: BottomSheetBehavior<View>
     lateinit var doctorSheetLayout: BottomSheetBehavior<View>
+    lateinit var bookAppointmentSheet: BottomSheetBehavior<View>
     val database = FirebaseDatabase.getInstance()
     val userMembersReference = database.getReference(Constants.USER_MEMBERS_REFERENCE)
     val userReference = database.getReference(Constants.USER_DATABASE_REFERENCE)
@@ -51,6 +54,9 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
     lateinit var sharedPrefsManager: SharedPrefsManager
     lateinit var signedInUser: AppUser
     lateinit var opdDepartmentSelected: OpdDepartments
+    var doctorSelected: Doctors? = null
+
+    val databaseReference = FirebaseDatabase.getInstance().getReference(Constants.APPOINTMENTS)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,13 +69,6 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
 
         sharedPrefsManager = SharedPrefsManager(this)
 
-        /* binding.selectPatient.firstPatientCard.setOnClickListener(View.OnClickListener {
-            setPatientSelected()
-        }) */
-
-        /*  binding.selectSpeciality.firstSpecialityCard.setOnClickListener(View.OnClickListener {
-              setSpecialitySelected()
-          })*/
 
         binding.selectDate.dateNext.setOnClickListener(View.OnClickListener {
             setDateSelected()
@@ -88,10 +87,14 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         selectPatientSheet = BottomSheetBehavior.from(binding.patientSheet)
         dateSelectionSheet = BottomSheetBehavior.from(binding.dateAndTimeSheet)
         doctorSheetLayout = BottomSheetBehavior.from(binding.doctorSheet)
+        bookAppointmentSheet = BottomSheetBehavior.from(binding.bookAppointmentSheet)
 
         doctorSheetLayout.state = BottomSheetBehavior.STATE_HIDDEN
         specializationSheet.state = BottomSheetBehavior.STATE_HIDDEN
         dateSelectionSheet.state = BottomSheetBehavior.STATE_HIDDEN
+        bookAppointmentSheet.state = BottomSheetBehavior.STATE_HIDDEN
+
+
         binding.dateAndTimeSheetLayout.visibility = View.VISIBLE
         binding.specialitySheetLayout.visibility = View.VISIBLE
         binding.doctorSheetLayout.visibility = View.VISIBLE
@@ -105,7 +108,6 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setDepartmentsAdapter() {
-
         val gson = Gson()
         val departmentModel =
             gson.fromJson<DepartmentModel>(CacheConstants.ORG_DETAILS, DepartmentModel::class.java)
@@ -200,11 +202,52 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
             Constants.DAYS_OF_WEEK[selectedDate?.day?.minus(1)!!]
         )
 
-        doctorsAdapter = DoctorsAdapter(this, doctorsAvailableOnDate)
+        doctorsAdapter =
+            DoctorsAdapter(this, doctorsAvailableOnDate, object : OnDoctorSelectedCallback {
+                override fun onDoctorSelected(doctor: Doctors) {
+                    doctorSelected = doctor
+                    setDoctorSelected()
+                }
+            })
         binding.selectDoctor.doctorsRV.layoutManager = LinearLayoutManager(this)
         binding.selectDoctor.doctorsRV.adapter = doctorsAdapter
 
     }
+
+    private fun setDoctorSelected() {
+        binding.selectDoctor.selectedCard.root.visibility = View.VISIBLE
+        with(binding.selectDoctor)
+        {
+            selectedCard.selectedAttribute.text =
+                getString(R.string.doctor_selected)
+            selectedCard.selectedValue.text = doctorSelected?.name
+        }
+
+        binding.selectDoctor.selectedCard.edit.setOnClickListener(View.OnClickListener {
+            doctorSheetLayout.state = BottomSheetBehavior.STATE_EXPANDED
+            binding.selectDoctor.selectedCard.root.visibility = View.GONE
+        })
+
+        bookAppointmentSheet.state = BottomSheetBehavior.STATE_EXPANDED
+        binding.selectModeOfPayment.payAndBook.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this@BookAppointment, PaymentGatewayActivity::class.java))
+        })
+
+        binding.selectModeOfPayment.justBook.setOnClickListener(View.OnClickListener {
+            val dialog = LoadingDialog(this@BookAppointment)
+            dialog.show()
+            dialog.setTitle(getString(R.string.booking_appointment))
+            Handler().postDelayed(Runnable {
+                dialog.dismiss()
+                binding.successLayout.root.visibility = View.VISIBLE
+                binding.successLayout.successAnim.playAnimation()
+                binding.activityLayout.visibility = View.GONE
+                binding.successLayout.successAnim.repeatCount = 0
+            }, 6000);
+        })
+
+    }
+
 
     private fun showDatePickingDailog() {
         binding.selectDate.chooseDate.setOnClickListener(View.OnClickListener {
@@ -294,9 +337,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         firebaseUser?.uid?.let {
             userReference.child(it).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
-
                 }
-
                 override fun onDataChange(snapshot: DataSnapshot) {
                     signedInUser = snapshot.getValue(AppUser::class.java)!!
                     signedInUser?.let { it1 ->
@@ -306,7 +347,6 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
                 }
             })
         }
-
 
     }
 

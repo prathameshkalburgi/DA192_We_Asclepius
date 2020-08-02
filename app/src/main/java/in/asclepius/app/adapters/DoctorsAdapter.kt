@@ -1,6 +1,7 @@
 package `in`.asclepius.app.adapters
 
 import `in`.asclepius.app.R
+import `in`.asclepius.app.`interface`.OnDoctorSelectedCallback
 import `in`.asclepius.app.databinding.DoctorsCardBinding
 import `in`.asclepius.app.models.Doctors
 import android.content.Context
@@ -9,8 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class DoctorsAdapter(private val context: Context, private val doctors: Array<Doctors>) :
+class DoctorsAdapter(
+    private val context: Context,
+    private val doctors: Array<Doctors>,
+    private val callback: OnDoctorSelectedCallback
+) :
     RecyclerView.Adapter<DoctorsAdapter.ViewHolder>() {
+
+    private var selectedDoctor: Doctors? = null
+        set(value) {
+            field = value
+        }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = DoctorsCardBinding.bind(itemView)
@@ -26,6 +36,22 @@ class DoctorsAdapter(private val context: Context, private val doctors: Array<Do
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val doctor = doctors.get(position)
+        holder.binding.doctorName.text = doctor.name
+        holder.binding.doctorRating.text = "Rating : 4.2"
+        holder.binding.experienceText.text = "Experience : 3 Years"
+        holder.binding.root.setOnClickListener(View.OnClickListener {
+            callback.onDoctorSelected(doctor)
+        })
 
+        if (doctor.name == selectedDoctor?.name) {
+            with(holder.binding.root)
+            {
+                strokeColor = context.resources.getColor(R.color.colorAccent)
+                strokeWidth = 3
+            }
+
+
+        }
     }
 }
