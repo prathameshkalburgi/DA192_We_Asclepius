@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activities.PaymentGatewayActivity">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <include layout="@layout/toolbar_card"
+    <include
+        layout="@layout/toolbar_card"
         android:id="@+id/toolbarCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -23,82 +23,89 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_padding"
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/wallet_card"
+                android:id="@+id/debit_card_payment"
+                android:layout_height="80dp"
                 android:layout_margin="@dimen/standard_padding"
                 android:clickable="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/colorPrimaryLight"
                 android:focusable="true"
-                app:cardBackgroundColor="white">
+                app:strokeWidth="1dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:padding="@dimen/standard_padding">
 
                     <ImageView
-                        android:id="@+id/feature_img"
                         android:layout_width="100dp"
                         android:layout_height="@dimen/feature_card_height"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="9dp"
-                        android:src="@drawable/doctors_vector" />
+                        android:src="@drawable/razor_pay" />
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:layout_marginTop="@dimen/standard_padding"
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/standard_padding"
                         android:text="@string/debit_card_payment"
                         android:textAppearance="@style/TextAppearance.Custom.Headline7"
-                        android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:layout_toRightOf="@id/feature_img"/>
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
 
-                </RelativeLayout>
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/debit_card"
+                android:id="@+id/upiPayment"
+                android:layout_height="80dp"
                 android:layout_margin="@dimen/standard_padding"
                 android:clickable="true"
+                app:cardBackgroundColor="@color/white"
                 android:focusable="true"
-                app:cardBackgroundColor="white">
+                app:cardElevation="4dp"
+                app:strokeColor="@color/colorPrimaryLight"
+                app:strokeWidth="1dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:padding="@dimen/standard_padding">
 
                     <ImageView
-                        android:id="@+id/feature_img2"
                         android:layout_width="100dp"
                         android:layout_height="@dimen/feature_card_height"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="9dp"
-                        android:src="@drawable/doctors_vector" />
+                        android:src="@drawable/bhim_upi" />
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:layout_marginTop="@dimen/standard_padding"
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/standard_padding"
-                        android:text="@string/wallet_payment"
+                        android:text="@string/upi"
                         android:textAppearance="@style/TextAppearance.Custom.Headline7"
-                        android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:layout_toRightOf="@id/feature_img2"/>
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
 
-                </RelativeLayout>
+                </LinearLayout>
+
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -106,70 +113,149 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/upi_card"
                 android:layout_margin="@dimen/standard_padding"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/colorPrimaryLight"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardBackgroundColor="white">
+                app:strokeWidth="1dp">
 
-                <LinearLayout
+                <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/standard_padding">
-
-                        <ImageView
-                            android:id="@+id/feature_img3"
-                            android:layout_width="100dp"
-                            android:layout_height="@dimen/feature_card_height"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginStart="9dp"
-                            android:src="@drawable/doctors_vector" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/feature_card_height"
-                            android:layout_centerVertical="true"
-                            android:layout_marginTop="@dimen/standard_padding"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="@dimen/standard_padding"
-                            android:text="@string/upi"
-                            android:textAppearance="@style/TextAppearance.Custom.Headline7"
-                            android:textColor="@color/colorPrimary"
-                            android:textStyle="bold"
-                            android:layout_toRightOf="@id/feature_img3"/>
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="170dp">
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="@dimen/standard_padding"
+                        android:layout_marginStart="@dimen/standard_padding"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/tiny_card1"
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/standard_padding"
                             android:clickable="true"
                             android:focusable="true"
-                            app:cardBackgroundColor="white">
+                            app:cardBackgroundColor="@color/white"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/standard_padding">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/feature_card_height"
+                                    android:layout_alignParentStart="true"
+                                    android:src="@drawable/google_pay_logo" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginTop="@dimen/standard_padding"
+                                    android:gravity="center"
+                                    android:singleLine="true"
+                                    android:text="@string/google_pay"
+                                    android:textAppearance="@style/TextAppearance.Custom.Caption"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
 
                         </com.google.android.material.card.MaterialCardView>
+
                         <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/tiny_card2"
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/standard_padding"
                             android:clickable="true"
                             android:focusable="true"
-                            app:cardBackgroundColor="white">
+                            app:cardBackgroundColor="@color/white"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/standard_padding">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/feature_card_height"
+                                    android:layout_alignParentStart="true"
+                                    android:src="@drawable/phone_pay_logo" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginTop="@dimen/standard_padding"
+                                    android:gravity="center"
+                                    android:singleLine="true"
+
+                                    android:text="@string/phone_pe"
+                                    android:textAppearance="@style/TextAppearance.Custom.Caption"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
 
                         </com.google.android.material.card.MaterialCardView>
 
-                    </RelativeLayout>
-                </LinearLayout>
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/standard_padding"
+                            android:clickable="true"
+                            app:cardBackgroundColor="@color/white"
+                            android:focusable="true"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/standard_padding">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="47dp"
+                                    android:layout_alignParentStart="true"
+                                    android:src="@drawable/paytm_logo" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginTop="@dimen/standard_padding"
+                                    android:gravity="center"
+                                    android:singleLine="true"
+                                    android:text="@string/paytm"
+                                    android:textAppearance="@style/TextAppearance.Custom.Caption"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
