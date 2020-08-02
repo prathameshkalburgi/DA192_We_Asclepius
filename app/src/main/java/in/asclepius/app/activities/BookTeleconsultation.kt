@@ -8,7 +8,7 @@ import `in`.asclepius.app.adapters.DepartmentsAdapter
 import `in`.asclepius.app.adapters.DoctorsAdapter
 import `in`.asclepius.app.adapters.MemberAdapter
 import `in`.asclepius.app.dailogs.LoadingDialog
-import `in`.asclepius.app.databinding.ActivityBookAppointmentBinding
+import `in`.asclepius.app.databinding.ActivityBookTeleconsultationBinding
 import `in`.asclepius.app.models.*
 import `in`.asclepius.app.others.CacheConstants
 import `in`.asclepius.app.others.Constants
@@ -29,8 +29,7 @@ import com.google.gson.Gson
 import java.util.*
 import kotlin.random.Random
 
-
-class BookAppointment : AppCompatActivity(), View.OnClickListener {
+class BookTeleconsultation : AppCompatActivity(), View.OnClickListener {
 
     private var datePicker: MaterialSpinnerDatePicker? = null
     private lateinit var doctorsAdapter: DoctorsAdapter
@@ -38,11 +37,10 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
     private var selectedDate: Date? = null
     private lateinit var departmentAdapter: DepartmentsAdapter
     private lateinit var memberAdapter: MemberAdapter
-    lateinit var binding: ActivityBookAppointmentBinding
+    lateinit var binding: ActivityBookTeleconsultationBinding
     lateinit var mContext: Context
     lateinit var specializationSheet: BottomSheetBehavior<View>
     lateinit var selectPatientSheet: BottomSheetBehavior<View>
-    lateinit var dateSelectionSheet: BottomSheetBehavior<View>
     lateinit var doctorSheetLayout: BottomSheetBehavior<View>
     lateinit var bookAppointmentSheet: BottomSheetBehavior<View>
     val database = FirebaseDatabase.getInstance()
@@ -62,40 +60,29 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityBookAppointmentBinding.inflate(layoutInflater)
+        binding = ActivityBookTeleconsultationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         mContext = this
 
         sharedPrefsManager = SharedPrefsManager(this)
-
-
-        binding.selectDate.dateNext.setOnClickListener(View.OnClickListener {
-            setDateSelected()
-        })
-
         binding.toolbarCard.toolbar.title = getString(R.string.bookAppointmentNow)
 
         binding.selectPatient.loadingView.root.visibility = View.VISIBLE
         binding.selectPatient.loadingView.title.text = "Getting family members data"
 
         setSelfCard()
-
         setDepartmentsAdapter()
-
         specializationSheet = BottomSheetBehavior.from(binding.specialitySheet)
         selectPatientSheet = BottomSheetBehavior.from(binding.patientSheet)
-        dateSelectionSheet = BottomSheetBehavior.from(binding.dateAndTimeSheet)
+
         doctorSheetLayout = BottomSheetBehavior.from(binding.doctorSheet)
         bookAppointmentSheet = BottomSheetBehavior.from(binding.bookAppointmentSheet)
 
         doctorSheetLayout.state = BottomSheetBehavior.STATE_HIDDEN
         specializationSheet.state = BottomSheetBehavior.STATE_HIDDEN
-        dateSelectionSheet.state = BottomSheetBehavior.STATE_HIDDEN
         bookAppointmentSheet.state = BottomSheetBehavior.STATE_HIDDEN
 
-
-        binding.dateAndTimeSheetLayout.visibility = View.VISIBLE
         binding.specialitySheetLayout.visibility = View.VISIBLE
         binding.doctorSheetLayout.visibility = View.VISIBLE
 
@@ -105,6 +92,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
 
         binding.selectPatient.addNewMember.setOnClickListener(this)
 
+        binding.toolbarCard.toolbar.title = getString(R.string.bookTeleConsultation)
 
     }
 
@@ -121,12 +109,12 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
             })
         binding.selectSpeciality.departmentRV.layoutManager = LinearLayoutManager(this)
         binding.selectSpeciality.departmentRV.adapter = departmentAdapter
+
     }
 
 
     private fun setPatientSelected() {
         binding.selectPatient.selectedCard.root.visibility = View.VISIBLE
-        // binding.selectPatient.patientsLayout.visibility = View.GONE
         specializationSheet.state = BottomSheetBehavior.STATE_EXPANDED
         binding.specialitySheetLayout.visibility = View.VISIBLE
         selectPatientSheet.isHideable = false
@@ -137,7 +125,6 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         binding.selectPatient.selectedCard.edit.setOnClickListener(View.OnClickListener {
             binding.selectPatient.selectedCard.root.visibility = View.GONE
             binding.selectPatient.patientsLayout.visibility = View.VISIBLE
-            dateSelectionSheet.state = BottomSheetBehavior.STATE_HIDDEN
             specializationSheet.state = BottomSheetBehavior.STATE_HIDDEN
             doctorSheetLayout.state = BottomSheetBehavior.STATE_HIDDEN
         })
@@ -156,51 +143,19 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         binding.selectSpeciality.selectedCard.edit.setOnClickListener(View.OnClickListener {
             specializationSheet.state = BottomSheetBehavior.STATE_EXPANDED
             binding.selectSpeciality.selectedCard.root.visibility = View.GONE
-            dateSelectionSheet.state = BottomSheetBehavior.STATE_HIDDEN
             doctorSheetLayout.state = BottomSheetBehavior.STATE_HIDDEN
             binding.selectSpeciality.specialityLayout.visibility = View.VISIBLE
         })
 
-        //   binding.selectSpeciality.specialityLayout.visibility = View.GONE
-        dateSelectionSheet.state = BottomSheetBehavior.STATE_EXPANDED
         selectPatientSheet.state = BottomSheetBehavior.STATE_EXPANDED
         selectPatientSheet.isDraggable = false
         specializationSheet.isDraggable = false
-        binding.dateAndTimeSheetLayout.visibility = View.VISIBLE
         selectPatientSheet.isHideable = false
-
-        showDatePickingDailog()
-    }
-
-    private fun setDateSelected() {
-        binding.selectDate.selectedCard.root.visibility = View.VISIBLE
-        with(binding.selectDate)
-        {
-            selectedCard.selectedAttribute.text =
-                getString(R.string.selectedDate)
-            selectedCard.selectedValue.text = selectedDateString
-        }
-
-        binding.selectDate.selectedCard.edit.setOnClickListener(View.OnClickListener {
-            dateSelectionSheet.state = BottomSheetBehavior.STATE_EXPANDED
-            binding.selectDate.selectedCard.root.visibility = View.GONE
-            doctorSheetLayout.state = BottomSheetBehavior.STATE_HIDDEN
-            binding.selectDate.datePickerLayout.visibility = View.VISIBLE
-        })
-
-
-        dateSelectionSheet.state = BottomSheetBehavior.STATE_EXPANDED
         doctorSheetLayout.state = BottomSheetBehavior.STATE_EXPANDED
-        selectPatientSheet.isDraggable = false
-        specializationSheet.isDraggable = false
-        binding.dateAndTimeSheetLayout.visibility = View.VISIBLE
-        selectPatientSheet.isHideable = false
+        binding.doctorSheetLayout.visibility = View.VISIBLE
 
-        // Set the doctors adapter
-        val doctorsAvailableOnDate = Doctors.getDoctorsAvailableOnDay(
-            opdDepartmentSelected.availabeSpeciality[0].doctors,
-            Constants.DAYS_OF_WEEK[selectedDate?.day?.minus(1)!!]
-        )
+        val doctorsAvailableOnDate = opdDepartmentSelected.availabeSpeciality[0].doctors
+
         doctorsAdapter =
             DoctorsAdapter(this, doctorsAvailableOnDate, object : OnDoctorSelectedCallback {
                 override fun onDoctorSelected(doctor: Doctors) {
@@ -212,10 +167,13 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         binding.selectDoctor.doctorsRV.layoutManager = LinearLayoutManager(this)
         binding.selectDoctor.doctorsRV.adapter = doctorsAdapter
 
+
     }
 
     private fun setDoctorSelected() {
+
         binding.selectDoctor.selectedCard.root.visibility = View.VISIBLE
+
         with(binding.selectDoctor)
         {
             selectedCard.selectedAttribute.text =
@@ -229,56 +187,11 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         })
 
         bookAppointmentSheet.state = BottomSheetBehavior.STATE_EXPANDED
-        binding.selectModeOfPayment.payAndBook.setOnClickListener(View.OnClickListener {
-            startActivity(Intent(this@BookAppointment, PaymentGatewayActivity::class.java))
-        })
 
-        binding.selectModeOfPayment.justBook.setOnClickListener(View.OnClickListener {
+        binding.confirm.requestConsultation.setOnClickListener(View.OnClickListener {
             bookAppointment()
         })
 
-    }
-
-
-    private fun showDatePickingDailog() {
-        binding.selectDate.chooseDate.setOnClickListener(View.OnClickListener {
-            datePicker = MaterialSpinnerDatePicker(this)
-                .setDividerColor(`in`.asclepius.app.R.color.colorPrimary)
-                .setNextButtonColor(`in`.asclepius.app.R.color.colorPrimary)
-                .setNextButtonTextColor(`in`.asclepius.app.R.color.white)
-                .setTopBarBGColor(`in`.asclepius.app.R.color.colorAccent)
-                .setNextButtonText("Next")
-                .setDefaultDateToToday()
-                .setCloseOnTouchOutSide(true)
-                .setTitle(getString(`in`.asclepius.app.R.string.select_appointment_date))
-                .setTitleTextColor(`in`.asclepius.app.R.color.black) // for customizing text color of the title
-                .setTopBarTextColor(`in`.asclepius.app.R.color.white) // For custom top bar text color
-                .setOnDateSelectedListener(object :
-                    MaterialSpinnerDatePicker.MaterialDatePickerListener {
-                    override fun onDateSelected(
-                        dateString: String?,
-                        rawDateString: String?,
-                        dateObject: Date?
-                    ) {
-                        if (dateObject?.day?.minus(1) == -1) {
-                            Toast.makeText(
-                                this@BookAppointment,
-                                "Please Don't Select Sunday. Sunday is working day",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            datePicker?.show()
-                        } else {
-                            selectedDate = dateObject
-                            selectedDateString = dateString
-                            setDateSelected()
-                        }
-
-                    }
-                })
-
-            datePicker?.show()
-
-        })
     }
 
 
@@ -304,6 +217,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
                     user?.let { it1 -> userMembers.add(it1) }
                     setPatientsAdapter()
                 }
+
                 override fun onChildRemoved(snapshot: DataSnapshot) {
                     TODO("Not yet implemented")
                 }
@@ -353,11 +267,9 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun bookAppointment() {
-        val dialog = LoadingDialog(this@BookAppointment)
+        val dialog = LoadingDialog(this@BookTeleconsultation)
         dialog.show()
         dialog.setTitle(getString(R.string.booking_appointment))
-
-
         var appointment = ModelAppointment(
             selectedPatient,
             selectedDateString,
@@ -367,7 +279,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
             "Active",
             signedInUser,
             Random.nextInt(0, 50000),
-            false
+            true
         )
         firebaseUser?.uid?.let {
             databaseReference.child(it).child(appointment.appointmentId.toString())

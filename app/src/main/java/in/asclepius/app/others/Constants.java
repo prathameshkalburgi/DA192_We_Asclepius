@@ -32,4 +32,6 @@ public class Constants {
 
     @NotNull
     public static final String APPOINTMENTS = "appointments";
+    @NotNull
+    public static final String TELE_CONSULTATIONS = "teleAppointments";
 }

@@ -128,5 +128,8 @@
     <string name="cancelled2">Status : Cancelled</string>
     <string name="rescheduling">Rescheduling ... Please wait</string>
     <string name="rescheduled">Rescheduled successfully</string>
+    <string name="request_consultation">Request Online Consultation</string>
+    <string name="online_consulation_note">Note : The doctors will clear your doubts or give you suggestions via online. Click below to confirm. The doctor will contact you as soon as possible</string>
+    <string name="online_successfull_message">Your request has been sent to the doctor. You will get the reply back from doctor as soon as possible</string>
 
 </resources>

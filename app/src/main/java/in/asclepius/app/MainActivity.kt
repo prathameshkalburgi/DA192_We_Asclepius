@@ -1,6 +1,7 @@
 package `in`.asclepius.app
 
 import `in`.asclepius.app.activities.BookAppointment
+import `in`.asclepius.app.activities.BookTeleconsultation
 import `in`.asclepius.app.activities.ManageAppointment
 import `in`.asclepius.app.dailogs.LoadingDialog
 import `in`.asclepius.app.databinding.ActivityMainBinding
@@ -54,6 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.manageAppointments.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this, ManageAppointment::class.java))
+        })
+
+        binding.bookTeleconsultation.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this, BookTeleconsultation::class.java))
         })
 
     }

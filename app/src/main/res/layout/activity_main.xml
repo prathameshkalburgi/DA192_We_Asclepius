@@ -119,6 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/standard_padding"
                 android:clickable="true"
+                android:id="@+id/bookTeleconsultation"
                 android:focusable="true"
                 android:foreground="@color/colorAccent"
                 app:cardBackgroundColor="#FBB562">

@@ -53,6 +53,10 @@ class AppointmentsAdapter(
             holder.binding.activeCard.visibility = View.VISIBLE
         }
 
+        if (appointment.isOnlineConsultation) {
+            holder.binding.statusText.text = "Request Sent To Doctor"
+        }
+
 
     }
 

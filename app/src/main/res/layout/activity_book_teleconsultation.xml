@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".activities.BookAppointment">
+
+    <include
+        android:id="@+id/success_layout"
+        layout="@layout/online_consulation_success_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/activity_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/toolbarCard"
+            layout="@layout/toolbar_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbarCard">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/patientSheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/standard_padding"
+                android:layout_marginRight="@dimen/standard_padding"
+                app:behavior_hideable="true"
+                app:cardCornerRadius="@dimen/book_appointment_card_radius"
+                app:cardElevation="@dimen/standard_padding"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp">
+
+                <include
+                    android:id="@+id/selectPatient"
+                    layout="@layout/select_patient" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/specialitySheetLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbarCard"
+            android:layout_marginTop="75dp"
+            android:visibility="gone">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/specialitySheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/standard_padding"
+                android:layout_marginRight="@dimen/standard_padding"
+                app:behavior_hideable="true"
+                app:cardCornerRadius="@dimen/book_appointment_card_radius"
+                app:cardElevation="@dimen/standard_padding"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp">
+
+                <include
+                    android:id="@+id/selectSpeciality"
+                    layout="@layout/select_speciality" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/doctorSheetLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbarCard"
+            android:layout_marginTop="150dp"
+            android:visibility="visible">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/doctorSheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/standard_padding"
+                android:layout_marginRight="@dimen/standard_padding"
+                app:behavior_hideable="true"
+                app:behavior_peekHeight="25dp"
+                app:cardCornerRadius="@dimen/book_appointment_card_radius"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp">
+
+
+                <include
+                    android:id="@+id/selectDoctor"
+                    layout="@layout/select_doctor" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/bookAppointmentCard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbarCard"
+            android:layout_marginTop="225dp"
+            android:visibility="visible">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/bookAppointmentSheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/standard_padding"
+                android:layout_marginRight="@dimen/standard_padding"
+                app:behavior_hideable="true"
+                app:behavior_peekHeight="25dp"
+                app:cardCornerRadius="@dimen/book_appointment_card_radius"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp">
+
+
+                <include
+                    android:id="@+id/confirm"
+                    layout="@layout/request_online_consultation" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

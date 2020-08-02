@@ -16,9 +16,10 @@ public class ModelAppointment {
     private String status;
     private AppUser bookedBy;
     private Integer appointmentId;
+    private boolean isOnlineConsultation;
 
 
-    public ModelAppointment(AppUser patient, String bookingDate, boolean isFeesPaid, Doctors doctor, String department, String status, AppUser bookedBy, Integer appointmentId) {
+    public ModelAppointment(AppUser patient, String bookingDate, boolean isFeesPaid, Doctors doctor, String department, String status, AppUser bookedBy, Integer appointmentId, boolean isOnlineConsultation) {
         this.patient = patient;
         this.bookingDate = bookingDate;
         this.isFeesPaid = isFeesPaid;
@@ -27,6 +28,7 @@ public class ModelAppointment {
         this.status = status;
         this.bookedBy = bookedBy;
         this.appointmentId = appointmentId;
+        this.isOnlineConsultation = isOnlineConsultation;
     }
 
     public ModelAppointment() {
@@ -109,7 +111,14 @@ public class ModelAppointment {
 
     @NotNull
     public String getDataForUser() {
-        return "Patient Name : " + patient.getFullName() + "\nAge : " + patient.getAge() + "\n" + "Date : " + bookingDate + "\nAppointment Id : " + appointmentId;
+        if (!isOnlineConsultation) {
+            return "Patient Name : " + patient.getFullName() + "\nAge : " + patient.getAge() + "\n" + "Date : " + bookingDate + "\nAppointment Id : " +
+                    appointmentId + "\n\nDoctor Name :  " + doctor.getName() + "\nDepartment : " + department;
+        } else {
+            return "Patient Name : " + patient.getFullName() + "\nAge : " + patient.getAge() + "\n" +
+                    "Appointment Id : " + appointmentId + "\n\nDoctor Name :  " + doctor.getName() + "\nDepartment : " + department;
+        }
+
     }
 
     @PropertyName("appointmentId")
@@ -120,5 +129,15 @@ public class ModelAppointment {
     @PropertyName("appointmentId")
     public void setAppointmentId(Integer appointmentId) {
         this.appointmentId = appointmentId;
+    }
+
+    @PropertyName("isOnlineConsultation")
+    public boolean isOnlineConsultation() {
+        return isOnlineConsultation;
+    }
+
+    @PropertyName("isOnlineConsultation")
+    public void setOnlineConsultation(boolean onlineConsultation) {
+        isOnlineConsultation = onlineConsultation;
     }
 }
