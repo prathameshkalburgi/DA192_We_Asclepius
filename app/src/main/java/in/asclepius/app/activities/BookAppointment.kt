@@ -1,12 +1,18 @@
 package `in`.asclepius.app.activities
 
 import `in`.asclepius.app.R
+import `in`.asclepius.app.`interface`.OnDepartmentSelected
 import `in`.asclepius.app.`interface`.PatientSelectedCallback
+import `in`.asclepius.app.adapters.DepartmentsAdapter
 import `in`.asclepius.app.adapters.MemberAdapter
 import `in`.asclepius.app.databinding.ActivityBookAppointmentBinding
 import `in`.asclepius.app.models.AppUser
+import `in`.asclepius.app.models.DepartmentModel
+import `in`.asclepius.app.models.OpdDepartments
+import `in`.asclepius.app.others.CacheConstants
 import `in`.asclepius.app.others.Constants
 import `in`.asclepius.app.others.SharedPrefsManager
+import `in`.codeworld.spinnerdatepicker.MaterialSpinnerDatePicker
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -17,9 +23,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.gson.Gson
+import java.util.*
+
 
 class BookAppointment : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var departmentAdapter: DepartmentsAdapter
     private lateinit var memberAdapter: MemberAdapter
     lateinit var binding: ActivityBookAppointmentBinding
     lateinit var mContext: Context
@@ -35,6 +45,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
     lateinit var selectedPatient: AppUser
     lateinit var sharedPrefsManager: SharedPrefsManager
     lateinit var signedInUser: AppUser
+    lateinit var opdDepartmentSelected: OpdDepartments
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,13 +70,15 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
             setDateSelected()
         })
 
-
         binding.toolbarCard.toolbar.title = getString(R.string.bookAppointmentNow)
 
         binding.selectPatient.loadingView.root.visibility = View.VISIBLE
         binding.selectPatient.loadingView.title.text = "Getting family members data"
 
         setSelfCard()
+
+        setDepartmentsAdapter()
+
         specializationSheet = BottomSheetBehavior.from(binding.specialitySheet)
         selectPatientSheet = BottomSheetBehavior.from(binding.patientSheet)
         dateSelectionSheet = BottomSheetBehavior.from(binding.dateAndTimeSheet)
@@ -84,6 +97,22 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
 
         binding.selectPatient.addNewMember.setOnClickListener(this)
 
+    }
+
+    private fun setDepartmentsAdapter() {
+
+        val gson = Gson()
+        val departmentModel =
+            gson.fromJson<DepartmentModel>(CacheConstants.ORG_DETAILS, DepartmentModel::class.java)
+        departmentAdapter =
+            DepartmentsAdapter(departmentModel, this, object : OnDepartmentSelected {
+                override fun onOPDselected(opdDepartment: OpdDepartments) {
+                    opdDepartmentSelected = opdDepartment
+                    setSpecialitySelected()
+                }
+            })
+        binding.selectSpeciality.departmentRV.layoutManager = LinearLayoutManager(this)
+        binding.selectSpeciality.departmentRV.adapter = departmentAdapter
     }
 
 
@@ -108,6 +137,22 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
 
     private fun setSpecialitySelected() {
         binding.selectSpeciality.selectedCard.root.visibility = View.VISIBLE
+        with(binding.selectSpeciality)
+        {
+            selectedCard.selectedAttribute.text =
+                getString(R.string.department) + " : " + opdDepartmentSelected.departmentName
+            selectedCard.selectedValue.text =
+                opdDepartmentSelected.availabeSpeciality[0].specialityName
+        }
+
+        binding.selectSpeciality.selectedCard.edit.setOnClickListener(View.OnClickListener {
+            specializationSheet.state = BottomSheetBehavior.STATE_EXPANDED
+            binding.selectSpeciality.selectedCard.root.visibility = View.GONE
+            dateSelectionSheet.state = BottomSheetBehavior.STATE_HIDDEN
+            timeSelectionSheet.state = BottomSheetBehavior.STATE_HIDDEN
+            binding.selectSpeciality.specialityLayout.visibility = View.VISIBLE
+        })
+
         binding.selectSpeciality.specialityLayout.visibility = View.GONE
         dateSelectionSheet.state = BottomSheetBehavior.STATE_EXPANDED
         selectPatientSheet.state = BottomSheetBehavior.STATE_EXPANDED
@@ -115,6 +160,36 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         specializationSheet.isDraggable = false
         binding.dateAndTimeSheetLayout.visibility = View.VISIBLE
         selectPatientSheet.isHideable = false
+
+        showDatePickingDailog()
+    }
+
+    private fun showDatePickingDailog() {
+        binding.datePicker.chooseDate.setOnClickListener(View.OnClickListener {
+            val datePicker = MaterialSpinnerDatePicker(this)
+                .setDividerColor(`in`.asclepius.app.R.color.colorPrimary)
+                .setNextButtonColor(`in`.asclepius.app.R.color.colorPrimary)
+                .setNextButtonTextColor(`in`.asclepius.app.R.color.white)
+                .setTopBarBGColor(`in`.asclepius.app.R.color.colorAccent)
+                .setNextButtonText("Next")
+                .setDefaultDateToToday()
+                .setCloseOnTouchOutSide(true)
+                .setTitle(getString(`in`.asclepius.app.R.string.select_appointment_date))
+                .setTitleTextColor(`in`.asclepius.app.R.color.black) // for customizing text color of the title
+                .setTopBarTextColor(`in`.asclepius.app.R.color.white) // For custom top bar text color
+                .setOnDateSelectedListener(object :
+                    MaterialSpinnerDatePicker.MaterialDatePickerListener {
+                    override fun onDateSelected(
+                        dateString: String?,
+                        rawDateString: String?,
+                        dateObject: Date?
+                    ) {
+
+                    }
+                })
+
+            datePicker.show()
+        })
     }
 
     private fun setDateSelected() {

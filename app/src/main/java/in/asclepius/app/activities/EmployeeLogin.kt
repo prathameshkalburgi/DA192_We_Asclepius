@@ -93,8 +93,6 @@ class EmployeeLogin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             binding.pleaseSelectRole.visibility = View.VISIBLE
             return false
         }
-
         return true
-
     }
 }

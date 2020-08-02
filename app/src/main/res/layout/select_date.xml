@@ -59,6 +59,19 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/chooseDate"
+            android:layout_width="220dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/large_padding"
+            android:text="@string/choose_date"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/colorAccent"
+            app:cornerRadius="@dimen/standard_padding"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="2dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/dateNext"
             android:layout_width="220dp"
             android:layout_height="55dp"

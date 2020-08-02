@@ -26,4 +26,6 @@ public class Constants {
     @Nullable
     public static final String USER_TYPE = "USER_ROLE_TYPE";
     public static String[] ADMIN_ROLES = new String[]{"Please Select Role", "Super Admin", "Organizational Head", "Doctor"};
+
+
 }

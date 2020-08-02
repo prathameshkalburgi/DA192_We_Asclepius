@@ -11,4 +11,5 @@
     <color name="selectedTextColor">#FF7750</color>
     <color name="errorColor">#BFFF4E4E</color>
     <color name="colorPrimaryLight">#A300827F</color>
+    <color name="green">#40BD12</color>
 </resources>

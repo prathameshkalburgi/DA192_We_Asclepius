@@ -12,50 +12,185 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_marginLeft="@dimen/standard_padding"
-        android:layout_marginTop="@dimen/standard_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="gone"
+        android:id="@+id/normalUserLayout"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_padding"
         app:cardBackgroundColor="@color/white"
-        android:layout_marginRight="@dimen/standard_padding"
-        app:cardElevation="@dimen/standard_padding"
-        android:layout_height="wrap_content">
+        app:cardElevation="@dimen/standard_padding">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:paddingTop="@dimen/standard_padding"
-            android:paddingLeft="@dimen/large_padding"
-            android:paddingBottom="@dimen/standard_padding"
-            android:paddingRight="@dimen/large_padding"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
-                android:text="@string/welcome"
-                android:id="@+id/welcomeText"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/large_padding"
+                android:layout_marginTop="@dimen/large_padding"
+                android:layout_marginBottom="@dimen/standard_padding"
+                android:text="@string/whatDoYouWantToDoToday"
                 android:textAppearance="@style/TextAppearance.Custom.Subtitle1"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
 
-            <TextView
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/bookAppointmentCard"
                 android:layout_width="match_parent"
-                android:text="@string/welcome"
-                android:layout_below="@id/welcomeText"
-                android:textStyle="bold"
-                android:layout_marginTop="@dimen/standard_padding"
-                android:textAppearance="@style/TextAppearance.Custom.Headline5"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard_padding"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#9C9FE7">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="60dp"
-                android:src="@drawable/google_icon"
-                app:shapeAppearance="@style/circleImageView"
-                android:layout_alignParentEnd="true"
-                android:layout_height="60dp"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/standard_padding">
 
-        </RelativeLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:layout_toLeftOf="@id/feature_img"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:text="@string/bookAppointmentNow"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/feature_img"
+                        android:layout_width="100dp"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/doctors_vector" />
+
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard_padding"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="@color/colorAccent"
+                app:cardBackgroundColor="#FBB562">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/standard_padding">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:layout_toLeftOf="@id/feature_img2"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:text="@string/bookTeleConsultation"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/feature_img2"
+                        android:layout_width="100dp"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/tele_consultation" />
+
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard_padding"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/colorAccent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/standard_padding">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:layout_toLeftOf="@id/feature_img3"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:text="@string/search_hospitals"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/feature_img3"
+                        android:layout_width="100dp"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/search_hospitals" />
+
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard_padding"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#629FFB">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/standard_padding">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:layout_toLeftOf="@id/feature_img4"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:text="@string/checkLabReports"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/feature_img4"
+                        android:layout_width="100dp"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/lab_reports" />
+
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -65,6 +200,8 @@
         android:layout_margin="@dimen/standard_padding"
         app:cardElevation="@dimen/standard_padding"
         app:cardBackgroundColor="@color/white"
+        android:id="@+id/superAdminLayout"
+        android:visibility="gone"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -86,7 +223,7 @@
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/standard_padding"
                 app:cardBackgroundColor="#9C9FE7"
-                android:id="@+id/bookAppointmentCard"
+                android:id="@+id/seePendingApprovals"
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_height="wrap_content">
@@ -98,24 +235,23 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:text="@string/bookAppointmentNow"
+                        android:layout_toLeftOf="@id/approvalImage"
                         android:layout_centerVertical="true"
                         android:textStyle="bold"
                         android:paddingLeft="@dimen/standard_padding"
                         android:textColor="@color/white"
                         android:layout_marginTop="@dimen/standard_padding"
                         android:gravity="center_vertical"
-                        android:layout_toLeftOf="@id/feature_img"
+                        android:text="@string/pendingApprovals"
                         android:textAppearance="@style/TextAppearance.Custom.Headline7"
                         android:layout_height="@dimen/feature_card_height"/>
 
                     <ImageView
                         android:layout_width="100dp"
                         android:src="@drawable/doctors_vector"
-                        android:id="@+id/feature_img"
+                        android:id="@+id/approvalImage"
                         android:layout_alignParentEnd="true"
                         android:layout_height="@dimen/feature_card_height"/>
-
 
                 </RelativeLayout>
 
@@ -137,111 +273,174 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:text="@string/bookTeleConsultation"
+                        android:layout_height="@dimen/feature_card_height"
                         android:layout_centerVertical="true"
                         android:textStyle="bold"
                         android:paddingLeft="@dimen/standard_padding"
                         android:textColor="@color/white"
                         android:layout_marginTop="@dimen/standard_padding"
                         android:gravity="center_vertical"
-                        android:layout_toLeftOf="@id/feature_img2"
+                        android:layout_toLeftOf="@id/newsImage"
                         android:textAppearance="@style/TextAppearance.Custom.Headline7"
-                        android:layout_height="@dimen/feature_card_height"/>
+                        android:text="@string/add_news" />
 
                     <ImageView
                         android:layout_width="100dp"
                         android:src="@drawable/tele_consultation"
-                        android:id="@+id/feature_img2"
-                        android:layout_alignParentEnd="true"
-                        android:layout_height="@dimen/feature_card_height"/>
+                        android:id="@+id/newsImage"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_alignParentEnd="true" />
 
 
                 </RelativeLayout>
 
             </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_margin="@dimen/standard_padding"
-                app:cardBackgroundColor="@color/colorAccent"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:padding="@dimen/standard_padding"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="@string/search_hospitals"
-                        android:layout_centerVertical="true"
-                        android:textStyle="bold"
-                        android:paddingLeft="@dimen/standard_padding"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="@dimen/standard_padding"
-                        android:gravity="center_vertical"
-                        android:layout_toLeftOf="@id/feature_img3"
-                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
-                        android:layout_height="@dimen/feature_card_height"/>
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:src="@drawable/search_hospitals"
-                        android:id="@+id/feature_img3"
-                        android:layout_alignParentEnd="true"
-                        android:layout_height="@dimen/feature_card_height"/>
-
-
-                </RelativeLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_margin="@dimen/standard_padding"
-                app:cardBackgroundColor="#629FFB"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:padding="@dimen/standard_padding"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="@string/checkLabReports"
-                        android:layout_centerVertical="true"
-                        android:textStyle="bold"
-                        android:paddingLeft="@dimen/standard_padding"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="@dimen/standard_padding"
-                        android:gravity="center_vertical"
-                        android:layout_toLeftOf="@id/feature_img4"
-                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
-                        android:layout_height="@dimen/feature_card_height"/>
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:src="@drawable/lab_reports"
-                        android:id="@+id/feature_img4"
-                        android:layout_alignParentEnd="true"
-                        android:layout_height="@dimen/feature_card_height"/>
-
-
-                </RelativeLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/organizationHeadLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_padding"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="@dimen/standard_padding">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/large_padding"
+                android:layout_marginTop="@dimen/large_padding"
+                android:layout_marginBottom="@dimen/standard_padding"
+                android:text="@string/whatDoYouWantToDoToday"
+                android:textAppearance="@style/TextAppearance.Custom.Subtitle1"
+                android:textStyle="bold" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/checkAppointments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard_padding"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#9C9FE7">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/standard_padding">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:layout_toLeftOf="@id/appointmentImage"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:text="@string/check_appointments"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/appointmentImage"
+                        android:layout_width="100dp"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/doctors_vector" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/standard_padding"
+                android:id="@+id/manage_departments"
+                android:foreground="@color/colorAccent"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#FBB562"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/standard_padding"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_toLeftOf="@id/manage_departments_image"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:gravity="center_vertical"
+                        android:text="@string/manage_departments"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:layout_height="@dimen/feature_card_height"/>
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:id="@+id/manage_departments_image"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/tele_consultation" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/standard_padding"
+                android:foreground="@color/colorAccent"
+                app:cardBackgroundColor="#FBB562"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/standard_padding"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_toLeftOf="@id/newsImageOrganization"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:gravity="center_vertical"
+                        android:text="@string/add_news"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:layout_height="@dimen/feature_card_height"/>
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:id="@+id/newsImageOrganization"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/tele_consultation" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
