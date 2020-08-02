@@ -10,16 +10,19 @@ public class ModelAppointment {
     private String bookingDate;
     private boolean isFeesPaid;
     private Doctors doctor;
-    private OpdDepartments opdDepartments;
+    private String opdDepartments;
     private String status;
+    private AppUser bookedBy;
 
-    public ModelAppointment(AppUser patient, String bookingDate, boolean isFeesPaid, Doctors doctor, OpdDepartments opdDepartments, String status) {
+
+    public ModelAppointment(AppUser patient, String bookingDate, boolean isFeesPaid, Doctors doctor, String opdDepartments, String status, AppUser bookedBy) {
         this.patient = patient;
         this.bookingDate = bookingDate;
         this.isFeesPaid = isFeesPaid;
         this.doctor = doctor;
         this.opdDepartments = opdDepartments;
         this.status = status;
+        this.bookedBy = bookedBy;
     }
 
     public ModelAppointment() {
@@ -66,12 +69,12 @@ public class ModelAppointment {
     }
 
     @PropertyName("opdDepartment")
-    public OpdDepartments getOpdDepartments() {
+    public String getOpdDepartments() {
         return opdDepartments;
     }
 
     @PropertyName("opdDepartment")
-    public void setOpdDepartments(OpdDepartments opdDepartments) {
+    public void setOpdDepartments(String opdDepartments) {
         this.opdDepartments = opdDepartments;
     }
 
@@ -83,5 +86,15 @@ public class ModelAppointment {
     @PropertyName("status")
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @PropertyName("bookedBy")
+    public AppUser getBookedBy() {
+        return bookedBy;
+    }
+
+    @PropertyName("bookedBy")
+    public void setBookedBy(AppUser bookedBy) {
+        this.bookedBy = bookedBy;
     }
 }

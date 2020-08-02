@@ -9,10 +9,7 @@ import `in`.asclepius.app.adapters.DoctorsAdapter
 import `in`.asclepius.app.adapters.MemberAdapter
 import `in`.asclepius.app.dailogs.LoadingDialog
 import `in`.asclepius.app.databinding.ActivityBookAppointmentBinding
-import `in`.asclepius.app.models.AppUser
-import `in`.asclepius.app.models.DepartmentModel
-import `in`.asclepius.app.models.Doctors
-import `in`.asclepius.app.models.OpdDepartments
+import `in`.asclepius.app.models.*
 import `in`.asclepius.app.others.CacheConstants
 import `in`.asclepius.app.others.Constants
 import `in`.asclepius.app.others.SharedPrefsManager
@@ -22,6 +19,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -29,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.gson.Gson
 import java.util.*
+import kotlin.random.Random
 
 
 class BookAppointment : AppCompatActivity(), View.OnClickListener {
@@ -234,16 +233,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         })
 
         binding.selectModeOfPayment.justBook.setOnClickListener(View.OnClickListener {
-            val dialog = LoadingDialog(this@BookAppointment)
-            dialog.show()
-            dialog.setTitle(getString(R.string.booking_appointment))
-            Handler().postDelayed(Runnable {
-                dialog.dismiss()
-                binding.successLayout.root.visibility = View.VISIBLE
-                binding.successLayout.successAnim.playAnimation()
-                binding.activityLayout.visibility = View.GONE
-                binding.successLayout.successAnim.repeatCount = 0
-            }, 6000);
+            bookAppointment()
         })
 
     }
@@ -338,6 +328,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
             userReference.child(it).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
                 }
+
                 override fun onDataChange(snapshot: DataSnapshot) {
                     signedInUser = snapshot.getValue(AppUser::class.java)!!
                     signedInUser?.let { it1 ->
@@ -346,6 +337,37 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
                     }
                 }
             })
+        }
+    }
+
+    private fun bookAppointment() {
+        val dialog = LoadingDialog(this@BookAppointment)
+        dialog.show()
+        dialog.setTitle(getString(R.string.booking_appointment))
+
+        var appointment = ModelAppointment(
+            selectedPatient,
+            selectedDateString,
+            false,
+            doctorSelected,
+            opdDepartmentSelected.departmentName,
+            "Active",
+            signedInUser
+        )
+        databaseReference.child(Random.nextInt(0, 5000).toString()).setValue(appointment)
+            .addOnSuccessListener {
+                binding.successLayout.root.visibility = View.VISIBLE
+                dialog.dismiss()
+                binding.successLayout.successAnim.playAnimation()
+                binding.activityLayout.visibility = View.GONE
+                binding.successLayout.successAnim.repeatCount = 0
+            }.addOnFailureListener {
+            dialog.dismiss()
+            Toast.makeText(
+                this,
+                getString(R.string.something_went_wrong_try_again_later),
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
     }

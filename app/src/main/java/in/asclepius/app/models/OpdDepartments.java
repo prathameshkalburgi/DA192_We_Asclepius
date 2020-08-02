@@ -1,9 +1,11 @@
 package in.asclepius.app.models;
 
+import java.util.ArrayList;
+
 public class OpdDepartments {
     private String departmentName;
 
-    private AvailabeSpeciality[] availabeSpeciality;
+    private ArrayList<AvailabeSpeciality> availabeSpeciality;
 
     public String getDepartmentName() {
         return departmentName;
@@ -13,11 +15,11 @@ public class OpdDepartments {
         this.departmentName = departmentName;
     }
 
-    public AvailabeSpeciality[] getAvailabeSpeciality() {
+    public ArrayList<AvailabeSpeciality> getAvailabeSpeciality() {
         return availabeSpeciality;
     }
 
-    public void setAvailabeSpeciality(AvailabeSpeciality[] availabeSpeciality) {
+    public void setAvailabeSpeciality(ArrayList<AvailabeSpeciality> availabeSpeciality) {
         this.availabeSpeciality = availabeSpeciality;
     }
 
