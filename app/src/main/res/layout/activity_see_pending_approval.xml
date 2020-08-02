@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.SeePendingApproval">
+
+    <include
+        android:id="@+id/toolbarCard"
+        layout="@layout/toolbar_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/approvalCard1"
+        layout="@layout/approval_card" />
+
+    <include
+        android:id="@+id/approvalCard2"
+        layout="@layout/approval_card" />
+
+    <include
+        android:id="@+id/approvalCard3"
+        layout="@layout/approval_card" />
+
+</LinearLayout>
