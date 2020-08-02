@@ -70,6 +70,7 @@ class MemberAdapter(
 
         if (member.relationType == null) {
             holder.binding.realtionText.text = "Your self"
+            holder.binding.memberAgeCard.visibility = View.GONE
         }
 
         if (member.age <= 0) {

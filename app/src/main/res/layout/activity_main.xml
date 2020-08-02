@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:id="@+id/normalUserLayout"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_margin="@dimen/standard_padding"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="@dimen/standard_padding">
@@ -71,6 +71,44 @@
                         android:layout_alignParentEnd="true"
                         android:src="@drawable/doctors_vector" />
 
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/manage_appointments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard_padding"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#7BAF40">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/standard_padding">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/standard_padding"
+                        android:layout_toLeftOf="@id/featureImage5"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/standard_padding"
+                        android:text="@string/manage_appointments"
+                        android:textAppearance="@style/TextAppearance.Custom.Headline7"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/featureImage5"
+                        android:layout_width="100dp"
+                        android:layout_height="@dimen/feature_card_height"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/manage_appointment" />
 
                 </RelativeLayout>
 
@@ -190,6 +228,7 @@
                 </RelativeLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
 
         </LinearLayout>
 

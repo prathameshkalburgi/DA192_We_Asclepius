@@ -32,6 +32,7 @@ import kotlin.random.Random
 
 class BookAppointment : AppCompatActivity(), View.OnClickListener {
 
+    private var datePicker: MaterialSpinnerDatePicker? = null
     private lateinit var doctorsAdapter: DoctorsAdapter
     private var selectedDateString: String? = null
     private var selectedDate: Date? = null
@@ -177,7 +178,6 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
             selectedCard.selectedAttribute.text =
                 getString(R.string.selectedDate)
             selectedCard.selectedValue.text = selectedDateString
-
         }
 
         binding.selectDate.selectedCard.edit.setOnClickListener(View.OnClickListener {
@@ -200,7 +200,6 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
             opdDepartmentSelected.availabeSpeciality[0].doctors,
             Constants.DAYS_OF_WEEK[selectedDate?.day?.minus(1)!!]
         )
-
         doctorsAdapter =
             DoctorsAdapter(this, doctorsAvailableOnDate, object : OnDoctorSelectedCallback {
                 override fun onDoctorSelected(doctor: Doctors) {
@@ -208,6 +207,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
                     setDoctorSelected()
                 }
             })
+
         binding.selectDoctor.doctorsRV.layoutManager = LinearLayoutManager(this)
         binding.selectDoctor.doctorsRV.adapter = doctorsAdapter
 
@@ -241,7 +241,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
 
     private fun showDatePickingDailog() {
         binding.selectDate.chooseDate.setOnClickListener(View.OnClickListener {
-            val datePicker = MaterialSpinnerDatePicker(this)
+            datePicker = MaterialSpinnerDatePicker(this)
                 .setDividerColor(`in`.asclepius.app.R.color.colorPrimary)
                 .setNextButtonColor(`in`.asclepius.app.R.color.colorPrimary)
                 .setNextButtonTextColor(`in`.asclepius.app.R.color.white)
@@ -259,13 +259,24 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
                         rawDateString: String?,
                         dateObject: Date?
                     ) {
-                        selectedDate = dateObject
-                        selectedDateString = dateString
-                        setDateSelected()
+                        if (dateObject?.day?.minus(1) == -1) {
+                            Toast.makeText(
+                                this@BookAppointment,
+                                "Please Don't Select Sunday. Sunday is working day",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            datePicker?.show()
+                        } else {
+                            selectedDate = dateObject
+                            selectedDateString = dateString
+                            setDateSelected()
+                        }
+
                     }
                 })
 
-            datePicker.show()
+            datePicker?.show()
+
         })
     }
 
@@ -345,6 +356,8 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
         dialog.show()
         dialog.setTitle(getString(R.string.booking_appointment))
 
+        Random.nextInt(0, 5000)
+
         var appointment = ModelAppointment(
             selectedPatient,
             selectedDateString,
@@ -352,22 +365,26 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
             doctorSelected,
             opdDepartmentSelected.departmentName,
             "Active",
-            signedInUser
+            signedInUser,
+            Random.nextInt(0, 50000)
         )
-        databaseReference.child(Random.nextInt(0, 5000).toString()).setValue(appointment)
-            .addOnSuccessListener {
-                binding.successLayout.root.visibility = View.VISIBLE
-                dialog.dismiss()
-                binding.successLayout.successAnim.playAnimation()
-                binding.activityLayout.visibility = View.GONE
-                binding.successLayout.successAnim.repeatCount = 0
-            }.addOnFailureListener {
-            dialog.dismiss()
-            Toast.makeText(
-                this,
-                getString(R.string.something_went_wrong_try_again_later),
-                Toast.LENGTH_SHORT
-            ).show()
+        firebaseUser?.uid?.let {
+            databaseReference.child(it).child(appointment.appointmentId.toString())
+                .setValue(appointment)
+                .addOnSuccessListener {
+                    binding.successLayout.root.visibility = View.VISIBLE
+                    dialog.dismiss()
+                    binding.successLayout.successAnim.playAnimation()
+                    binding.activityLayout.visibility = View.GONE
+                    binding.successLayout.successAnim.repeatCount = 0
+                }.addOnFailureListener {
+                    dialog.dismiss()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.something_went_wrong_try_again_later),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
         }
 
     }

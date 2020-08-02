@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.PaymentGatewayActivity"></activity>
+        <activity android:name=".activities.ManageAppointment"></activity>
+        <activity android:name=".activities.PaymentGatewayActivity" />
         <activity android:name=".activities.SeePendingApproval" />
         <activity android:name=".activities.EmployeeLogin" />
         <activity android:name=".activities.RegisterAsDoctor" />
@@ -18,14 +19,13 @@
         <activity android:name=".activities.BookAppointment" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.CreateAccount" />
-        <activity android:name=".activities.OnBoardActivity">
+        <activity android:name=".activities.OnBoardActivity"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity">
-
         </activity>
     </application>
 

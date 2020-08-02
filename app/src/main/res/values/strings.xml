@@ -115,5 +115,18 @@
     <string name="upcoming_appointments">Upcoming appointments</string>
     <string name="registerAsDoctor">Register As Doctor</string>
     <string name="getting_appointments">Getting Appointments</string>
+    <string name="noAppointmentMade">You have\'t made any appointment yet.</string>
+    <string name="manage_appointments">Manage Appointments</string>
+    <string name="cancel_appointment">Cancel Appointment</string>
+    <string name="reschedule">Reschedule Appointment</string>
+    <string name="are_you_sure">Do you really want to cancel this appointment ? Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="cancelling_please_wait">Cancelling appointment please wait</string>
+    <string name="cancelled">Cancelled your appointment succesfully</string>
+    <string name="active">Status : Active</string>
+    <string name="cancelled2">Status : Cancelled</string>
+    <string name="rescheduling">Rescheduling ... Please wait</string>
+    <string name="rescheduled">Rescheduled successfully</string>
 
 </resources>

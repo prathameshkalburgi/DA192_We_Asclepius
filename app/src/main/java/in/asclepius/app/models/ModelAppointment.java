@@ -15,9 +15,10 @@ public class ModelAppointment {
     private String department;
     private String status;
     private AppUser bookedBy;
+    private Integer appointmentId;
 
 
-    public ModelAppointment(AppUser patient, String bookingDate, boolean isFeesPaid, Doctors doctor, String department, String status, AppUser bookedBy) {
+    public ModelAppointment(AppUser patient, String bookingDate, boolean isFeesPaid, Doctors doctor, String department, String status, AppUser bookedBy, Integer appointmentId) {
         this.patient = patient;
         this.bookingDate = bookingDate;
         this.isFeesPaid = isFeesPaid;
@@ -25,6 +26,7 @@ public class ModelAppointment {
         this.department = department;
         this.status = status;
         this.bookedBy = bookedBy;
+        this.appointmentId = appointmentId;
     }
 
     public ModelAppointment() {
@@ -102,6 +104,21 @@ public class ModelAppointment {
 
     @NotNull
     public String getData() {
-        return "Name : " + patient.getFullName() + "\nAge : " + patient.getAge() + "\nBooked by : " + bookedBy.getFullName() + "\nStatus : " + status + "\n" + "Date : " + bookingDate;
+        return "Patient Name : " + patient.getFullName() + "\nAge : " + patient.getAge() + "\nBooked by : " + bookedBy.getFullName() + "\nStatus : " + status + "\n" + "Date : " + bookingDate;
+    }
+
+    @NotNull
+    public String getDataForUser() {
+        return "Patient Name : " + patient.getFullName() + "\nAge : " + patient.getAge() + "\n" + "Date : " + bookingDate + "\nAppointment Id : " + appointmentId;
+    }
+
+    @PropertyName("appointmentId")
+    public Integer getAppointmentId() {
+        return appointmentId;
+    }
+
+    @PropertyName("appointmentId")
+    public void setAppointmentId(Integer appointmentId) {
+        this.appointmentId = appointmentId;
     }
 }

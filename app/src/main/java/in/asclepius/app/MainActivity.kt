@@ -1,6 +1,7 @@
 package `in`.asclepius.app
 
 import `in`.asclepius.app.activities.BookAppointment
+import `in`.asclepius.app.activities.ManageAppointment
 import `in`.asclepius.app.dailogs.LoadingDialog
 import `in`.asclepius.app.databinding.ActivityMainBinding
 import `in`.asclepius.app.databinding.AppointmentCardBinding
@@ -51,6 +52,10 @@ class MainActivity : AppCompatActivity() {
             binding.doctorLayout.visibility = View.GONE
         }
 
+        binding.manageAppointments.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this, ManageAppointment::class.java))
+        })
+
     }
 
     private fun setUpComingAppointments() {
@@ -97,6 +102,7 @@ class MainActivity : AppCompatActivity() {
             view.patientDetails.text = appointment.data
             binding.appointmentContainer.addView(view.root)
         }
+
 
     }
 }

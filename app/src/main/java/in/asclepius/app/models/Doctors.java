@@ -32,7 +32,6 @@ public class Doctors {
 
     public static Doctors[] getDoctorsAvailableOnDay(Doctors[] doctors, String availableOn) {
         ArrayList<Doctors> tempList = new ArrayList<>();
-
         for (int i = 0; i < doctors.length; i++) {
             Log.d("Doctors", "Comparing : required -> " + availableOn + " with actual : " + doctors[i].getAvailableOn());
             if (doctors[i].getAvailableOn().equalsIgnoreCase(availableOn)) {
