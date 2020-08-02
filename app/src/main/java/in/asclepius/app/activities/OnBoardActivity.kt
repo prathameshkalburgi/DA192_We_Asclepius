@@ -1,10 +1,7 @@
 package `in`.asclepius.app.activities
 
-import `in`.asclepius.app.MainActivity
 import `in`.asclepius.app.adapters.OnBoardPagerAdapter
 import `in`.asclepius.app.databinding.ActivityOnBoardBinding
-import `in`.asclepius.app.others.Constants
-import `in`.asclepius.app.others.SharedPrefsManager
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -63,10 +60,5 @@ class OnBoardActivity : AppCompatActivity() {
         /* if (FirebaseAuth.getInstance().currentUser != null) {
              startActivity(Intent(this, MainActivity::class.java))
          }*/
-
-        if (SharedPrefsManager(this).getString(Constants.USER_TYPE, "") != "") {
-            startActivity(Intent(this, MainActivity::class.java))
-
-        }
     }
 }

@@ -41,22 +41,15 @@ class MainActivity : AppCompatActivity() {
 
         roleOfUser = intent.getStringExtra(Constants.USER_TYPE)
 
-        if (roleOfUser != null || SharedPrefsManager(this@MainActivity).getString(
-                Constants.USER_TYPE,
-                ""
-            ) != ""
-        ) {
+        if (roleOfUser != null) {
             binding.normalUserLayout.visibility = View.GONE
             binding.doctorLayout.visibility = View.VISIBLE
+            setUpComingAppointments()
         } else {
             SharedPrefsManager(this@MainActivity).setString(Constants.USER_TYPE, "DOCTOR");
             binding.normalUserLayout.visibility = View.VISIBLE
             binding.doctorLayout.visibility = View.GONE
         }
-
-
-
-        setUpComingAppointments()
 
     }
 
@@ -84,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
                 Log.d("Child", "Child - > " + snapshot.value);
                 val appointment = snapshot.getValue(ModelAppointment::class.java)!!
-
+                appointmentList.add(appointment)
                 setAppointmentAdapter()
             }
 
