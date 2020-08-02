@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Online OPD Application</string>
     <string name="welcome">Welcome</string>
-    <string name="on_board_message_one">Now OPD Appointment Process  Made Easy</string>
+    <string name="on_board_message_one">Now OPD Appointment Process Made Easy</string>
     <string name="on_board_message_two">Why Stand In Line ? When you have Online OPD application ?</string>
     <string name="on_board_message_three">Now Find Hospitals, Doctors And Latest Health News.\nAll In one place</string>
     <string name="login">Login</string>
@@ -18,12 +18,12 @@
     <string name="signUp">Sign Up</string>
     <string name="whatDoYouWantToDoToday">What are you looking for today?</string>
     <string name="bookAppointmentNow">Book Appointment Now</string>
-    <string name="bookTeleConsultation">Book Teleconsulation Appointment</string>
+    <string name="bookTeleConsultation">Book Teleconsultation Appointment</string>
     <string name="search_hospitals">Browse Hospitals</string>
     <string name="checkLabReports">Check Lab Reports</string>
     <string name="select_patient">Select The Patient</string>
     <string name="specialityChoosen">"Speciality Chosen : "</string>
-    <string name="next">" Next"</string>
+    <string name="next">"Next"</string>
     <string name="select_appointment_date">"Select Appointment Date : "</string>
     <string name="selectedDate">"Selected Date : "</string>
     <string name="please_enter_full_name">Please enter full name</string>
@@ -46,7 +46,7 @@
     <string name="send_otp_and_verify"><![CDATA[Send OTP & Verify]]></string>
     <string name="otp_sent_confirmation">An OTP has been sent to your phone number \n+91%1s \n\nThe system will try to auto detect the sms. You can manually enter the OTP if not detected automatically. </string>
     <string name="confirmOTP">Confirm OTP</string>
-    <string name="invalid_otp">Invalid OTP entered. Please enter correct OTP</string>
+    <string name="invalid_otp">Invalid OTP Entered. Please enter correct OTP</string>
     <string name="mobile">"Mobile Number "</string>
     <string name="invalid_phone_number">Invalid phone number entered</string>
     <string name="verify_mobile_number">Verify Mobile Number</string>
@@ -63,7 +63,7 @@
     <string name="adding_member">Adding member</string>
     <string name="member_added">Member added successfully</string>
     <string name="adhar_required">Note : Aadhaar ID number is required to uniquely identify users across system.</string>
-    <string name="adhar_number">Aadhaar Id number</string>
+    <string name="adhar_number">Aadhaar Id Number</string>
     <string name="enter_correct_adhar_number">Please enter correct aadhar number</string>
     <string name="please_select_gender">Please select gender</string>
     <string name="please_select_relation_type">Please select relation type</string>
