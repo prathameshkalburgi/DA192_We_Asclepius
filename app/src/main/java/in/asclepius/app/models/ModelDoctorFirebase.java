@@ -3,7 +3,7 @@ package in.asclepius.app.models;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
-import java.util.List;
+import java.util.HashMap;
 
 @IgnoreExtraProperties
 public class ModelDoctorFirebase {
@@ -16,7 +16,7 @@ public class ModelDoctorFirebase {
     private int specialityId;
     private String speciality;
     private LocationClass location;
-    private List<ModelRating> ratings;
+    private HashMap<String, Object> ratings;
 
     public ModelDoctorFirebase() {
 
@@ -115,12 +115,16 @@ public class ModelDoctorFirebase {
     }
 
     @PropertyName("ratings")
-    public List<ModelRating> getRatings() {
+    public HashMap<String, Object> getRatings() {
         return ratings;
     }
 
     @PropertyName("ratings")
-    public void setRatings(List<ModelRating> ratings) {
+    public void setRatings(HashMap<String, Object> ratings) {
         this.ratings = ratings;
     }
+
+
 }
+
+

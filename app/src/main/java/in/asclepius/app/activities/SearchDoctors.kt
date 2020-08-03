@@ -122,9 +122,7 @@ class SearchDoctors : AppCompatActivity() {
 
     private fun setAdapter(doctorsList: MutableList<Doctors>, name: String) {
 
-
         binding.showingResultText.visibility = View.VISIBLE
-
 
 
         if (doctorsList.size > 0) {

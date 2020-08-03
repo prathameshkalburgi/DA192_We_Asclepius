@@ -7,7 +7,9 @@ import com.google.firebase.database.PropertyName;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class Doctors {
 
@@ -32,7 +34,16 @@ public class Doctors {
         fullName = doctor.getFullName();
         hospital = doctor.getHospital();
         location = doctor.getLocation();
-        this.ratings = doctor.getRatings();
+
+        if (doctor.getRatings() != null) {
+            Iterator it = doctor.getRatings().entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+                // ratings.add(rating)
+                ratings.add((ModelRating) pair.getValue());
+            }
+        }
+
         distance = (int) distance(doctor.getLocation().getLat(), doctor.getLocation().getLongitude(), userLocation.getLat(), userLocation.getLongitude(), 'K');
     }
 

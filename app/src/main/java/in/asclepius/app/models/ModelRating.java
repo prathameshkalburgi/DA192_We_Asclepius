@@ -3,6 +3,7 @@ package in.asclepius.app.models;
 import com.google.firebase.database.PropertyName;
 
 public class ModelRating {
+
     private double rating;
     private AppUser ratedBy;
     private String ratedOn;

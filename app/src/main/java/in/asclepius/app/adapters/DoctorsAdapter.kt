@@ -3,6 +3,7 @@ package `in`.asclepius.app.adapters
 import `in`.asclepius.app.R
 import `in`.asclepius.app.`interface`.OnDoctorSelectedCallback
 import `in`.asclepius.app.databinding.DoctorsCardBinding
+import `in`.asclepius.app.databinding.UserRatingCardBinding
 import `in`.asclepius.app.models.Doctors
 import android.content.Context
 import android.view.LayoutInflater
@@ -63,7 +64,27 @@ class DoctorsAdapter(
             holder.binding.locationCard.visibility = View.VISIBLE
             holder.binding.distanceCard.visibility = View.VISIBLE
             holder.binding.distance.text = doctor.distance.toString() + " km "
-            holder.binding.locationText.text = doctor.hospital;
+            holder.binding.locationText.text = doctor.hospital
+
+
+            if (doctor.ratings != null) {
+                for (rating in doctor.ratings) {
+                    val inflater =
+                        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                    val ratingView = inflater.inflate(
+                        R.layout.user_rating_card,
+                        holder.binding.ratingsContiner,
+                        true
+                    )
+                    val bindedView = UserRatingCardBinding.bind(ratingView)
+
+                    bindedView.ratedBy.text = rating.ratedBy.fullName
+                    bindedView.ratingView.rating = rating.rating.toFloat()
+                    holder.binding.ratingsContiner.addView(bindedView.root)
+                }
+
+                holder.binding.ratingLayout.visibility = View.VISIBLE
+            }
 
 
         } else {

@@ -9,6 +9,7 @@ import `in`.asclepius.app.dailogs.LoadingDialog
 import `in`.asclepius.app.dailogs.RatingDailog
 import `in`.asclepius.app.databinding.ActivityMainBinding
 import `in`.asclepius.app.databinding.AppointmentCardBinding
+import `in`.asclepius.app.models.AppUser
 import `in`.asclepius.app.models.Doctors
 import `in`.asclepius.app.models.ModelAppointment
 import `in`.asclepius.app.models.ModelRating
@@ -19,14 +20,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
+
+    private lateinit var signedInUser: AppUser
+
+    private val userReference =
+        FirebaseDatabase.getInstance().getReference(Constants.USER_DATABASE_REFERENCE)
+    var firebaseUser: FirebaseUser? = null
     lateinit var binding: ActivityMainBinding
     lateinit var mContext: Context
     var roleOfUser: String? = null
@@ -76,10 +84,33 @@ class MainActivity : AppCompatActivity() {
             }
         }).show()
 
+        setSelfCard()
+
     }
 
     private fun addRating(doctor: Doctors, rating: ModelRating) {
-        val reference = FirebaseDatabase.getInstance().getReference("")
+
+        loadingDailog = LoadingDialog(this);
+        loadingDailog.show()
+        loadingDailog.setTitle("Posting rating...")
+        val reference = FirebaseDatabase.getInstance().getReference(Constants.APP_DOCTORS_REF)
+        rating.ratedBy = signedInUser
+        reference.child("1").child("ratings").child(
+            Random.nextInt(0, 656655)
+                .toString()
+        ).setValue(rating)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Successfully Posted Rating", Toast.LENGTH_SHORT).show()
+                loadingDailog.dismiss()
+            }
+            .addOnFailureListener {
+                loadingDailog.dismiss()
+                Toast.makeText(
+                    this,
+                    getString(R.string.something_went_wrong_try_again_later),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
     }
 
     private fun setUpComingAppointments() {
@@ -127,6 +158,24 @@ class MainActivity : AppCompatActivity() {
             binding.appointmentContainer.addView(view.root)
         }
 
+    }
 
+    private fun setSelfCard() {
+        firebaseUser = FirebaseAuth.getInstance().currentUser
+        firebaseUser?.uid?.let {
+            userReference.child(it).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                    Log.d("UserData", "User Dataerror :  " + error);
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    Log.d("UserData", "User Data got : ");
+                    signedInUser = snapshot.getValue(AppUser::class.java)!!
+                    signedInUser?.let { it1 ->
+
+                    }
+                }
+            })
+        }
     }
 }
