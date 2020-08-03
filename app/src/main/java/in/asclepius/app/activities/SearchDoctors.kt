@@ -23,11 +23,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class SearchDoctors : AppCompatActivity() {
-
+    private val userReference =
+        FirebaseDatabase.getInstance().getReference(Constants.USER_DATABASE_REFERENCE)
     private lateinit var ratingDailog: RatingDailog
     lateinit var loadingDailog: LoadingDialog
     private val dbReference = FirebaseDatabase.getInstance().getReference("app_doctors")
-    private val firebaseUser = FirebaseAuth.getInstance().currentUser
+    private var firebaseUser = FirebaseAuth.getInstance().currentUser
     private val doctorsList: MutableList<ModelDoctorFirebase> = mutableListOf()
     private val modelList: MutableList<Doctors> = mutableListOf()
     lateinit var binding: ActivitySearchDoctorsBinding
@@ -63,6 +64,8 @@ class SearchDoctors : AppCompatActivity() {
             binding.searchEditText.setText("")
             setAdapter()
         })
+
+        setSelfCard()
 
     }
 
@@ -113,7 +116,6 @@ class SearchDoctors : AppCompatActivity() {
                             val appointment = children.getValue(ModelDoctorFirebase::class.java)!!
                             doctorsList.add(appointment)
                             setAdapter()
-
 
                     }
                 }
@@ -203,8 +205,7 @@ class SearchDoctors : AppCompatActivity() {
             override fun rateDoctor(doctor: Doctors, rating: ModelRating) {
                 addRating(doctor, rating)
             }
-        });
-
+        })
         ratingDailog.show()
     }
 
@@ -231,6 +232,24 @@ class SearchDoctors : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+        }
+    }
+
+    private fun setSelfCard() {
+        firebaseUser = FirebaseAuth.getInstance().currentUser
+        firebaseUser?.uid?.let {
+            userReference.child(it).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                    Log.d("UserData", "User Dataerror :  " + error);
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    Log.d("UserData", "User Data got : ");
+                    signedInUser = snapshot.getValue(AppUser::class.java)!!
+                    signedInUser?.let { it1 ->
+                    }
+                }
+            })
         }
     }
 

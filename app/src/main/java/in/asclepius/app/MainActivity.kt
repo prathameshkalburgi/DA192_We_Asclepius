@@ -78,6 +78,8 @@ class MainActivity : AppCompatActivity() {
             }
         }).show() */
 
+
+
         setSelfCard()
 
     }
@@ -143,10 +145,11 @@ class MainActivity : AppCompatActivity() {
                     Log.d("UserData", "User Data got : ");
                     signedInUser = snapshot.getValue(AppUser::class.java)!!
                     signedInUser?.let { it1 ->
-
                     }
                 }
             })
         }
     }
+
+
 }

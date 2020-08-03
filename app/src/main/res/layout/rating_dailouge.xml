@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/standard_padding"
-            android:text="Rate Doctor !!"
+            android:text="You are rating..."
             android:textAppearance="@style/TextAppearance.Custom.Headline6"
             android:textColor="@color/black" />
 

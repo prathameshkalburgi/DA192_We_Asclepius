@@ -97,25 +97,26 @@ class DoctorsAdapter(
 
                     val bindedView = UserRatingCardBinding.bind(ratingView)
                     bindedView.ratedBy.text = rating.ratedBy.fullName
+                    bindedView.descriptionText.text = rating.description
                     bindedView.ratingView.rating = rating.rating.toFloat()
                     holder.binding.ratingsContiner.addView(bindedView.root)
                     holder.binding.ratingLayout.visibility = View.VISIBLE
                 }
 
-                holder.binding.rateDoctor.setOnClickListener(View.OnClickListener {
-                    callback.onRateDoctor(doctor)
-                })
 
 
             } else {
                 holder.binding.ratingLayout.visibility = View.GONE
             }
 
-
             holder.binding.viewLocation.setOnClickListener(View.OnClickListener {
                 try {
                     val gmmIntentUri =
-                        Uri.parse("geo:0,0?q=${doctor.location.lat},${doctor.location.longitude},(${doctor.hospital})");
+                        Uri.parse(
+                            "geo:${doctor.location.lat},${doctor.location.longitude}?q=" + Uri.encode(
+                                doctor.hospital
+                            )
+                        );
                     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                     mapIntent.setPackage("com.google.android.apps.maps")
                     context.startActivity(mapIntent)
@@ -129,6 +130,11 @@ class DoctorsAdapter(
                 }
             })
 
+            holder.binding.rateDoctor.setOnClickListener(View.OnClickListener {
+                callback.onRateDoctor(doctor)
+            })
+
+
         } else {
             holder.binding.locationCard.visibility = View.GONE
             holder.binding.distanceCard.visibility = View.GONE
@@ -136,6 +142,4 @@ class DoctorsAdapter(
         }
 
     }
-
-
 }

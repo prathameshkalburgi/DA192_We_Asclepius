@@ -21,7 +21,6 @@ class EmployeeLogin : AppCompatActivity() {
         binding = ActivityEmployeeLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.loginBtn.setOnClickListener(View.OnClickListener {
             if (validateFields()) {
                 val dialog = LoadingDialog(this@EmployeeLogin)

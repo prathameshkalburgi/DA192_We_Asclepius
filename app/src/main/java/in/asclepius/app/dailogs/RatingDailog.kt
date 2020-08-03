@@ -23,6 +23,9 @@ class RatingDailog(
         binding = RatingDailougeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        binding.doctorName.text = (doctor.fullName)
+
         binding.submit.setOnClickListener(View.OnClickListener {
             if (binding.descriptionText.editText?.text.toString()
                     .isBlank() || binding.ratingView.rating == 0.0f

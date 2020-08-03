@@ -54,7 +54,7 @@
                 android:textStyle="bold"
                 android:padding="@dimen/standard_padding"
                 android:text="This is awesome"
-                android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle" />
+                android:textSize="13sp" />
 
 
         </com.google.android.material.card.MaterialCardView>

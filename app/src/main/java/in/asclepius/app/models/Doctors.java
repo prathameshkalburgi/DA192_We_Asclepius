@@ -40,6 +40,8 @@ public class Doctors {
         int count = 0;
         double sum = 0;
 
+        this.specialityId = doctor.getSpecialityId();
+
         if (doctor.getRatings() != null) {
 
             Iterator it = doctor.getRatings().entrySet().iterator();
@@ -60,7 +62,11 @@ public class Doctors {
             }
         }
 
-        distance = (int) distance(doctor.getLocation().getLat(), doctor.getLocation().getLongitude(), userLocation.getLat(), userLocation.getLongitude(), 'K');
+        try {
+            distance = (int) distance(doctor.getLocation().getLat(), doctor.getLocation().getLongitude(), userLocation.getLat(), userLocation.getLongitude(), 'K');
+        } catch (Exception e) {
+            Log.d("Error : ", "e" + e);
+        }
     }
 
     public Doctors() {
@@ -116,10 +122,12 @@ public class Doctors {
         this.rating = rating;
     }
 
+    @PropertyName("specialityId")
     public int getSpecialityId() {
         return specialityId;
     }
 
+    @PropertyName("specialityId")
     public void setSpecialityId(int specialityId) {
         this.specialityId = specialityId;
     }
