@@ -64,6 +64,7 @@ class OnBoardActivity : AppCompatActivity() {
         try {
             if (FirebaseAuth.getInstance().currentUser != null) {
                 startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
         } catch (e: Exception) {
             Log.d("Error", "Error : " + e.toString());
