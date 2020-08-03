@@ -72,11 +72,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SearchDoctors::class.java))
         })
 
-       /* RatingDailog(this, Doctors(), object : RateCallback {
-            override fun rateDoctor(doctor: Doctors, rating: ModelRating) {
-                addRating(doctor, rating)
-            }
-        }).show() */
+        binding.toolbarCard.toolbar.setNavigationIcon(null)
+
+        /* RatingDailog(this, Doctors(), object : RateCallback {
+             override fun rateDoctor(doctor: Doctors, rating: ModelRating) {
+                 addRating(doctor, rating)
+             }
+         }).show() */
 
 
 
