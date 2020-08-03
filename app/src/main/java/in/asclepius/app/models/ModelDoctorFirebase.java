@@ -3,6 +3,8 @@ package in.asclepius.app.models;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
+import java.util.List;
+
 @IgnoreExtraProperties
 public class ModelDoctorFirebase {
 
@@ -13,6 +15,8 @@ public class ModelDoctorFirebase {
     private float rating;
     private int specialityId;
     private String speciality;
+    private LocationClass location;
+    private List<ModelRating> ratings;
 
     public ModelDoctorFirebase() {
 
@@ -26,6 +30,7 @@ public class ModelDoctorFirebase {
         this.rating = rating;
         this.specialityId = specialityId;
         this.speciality = speciality;
+
     }
 
     @PropertyName("experience")
@@ -97,5 +102,25 @@ public class ModelDoctorFirebase {
     @PropertyName("speciality")
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
+    }
+
+    @PropertyName("location")
+    public LocationClass getLocation() {
+        return location;
+    }
+
+    @PropertyName("location")
+    public void setLocation(LocationClass location) {
+        this.location = location;
+    }
+
+    @PropertyName("ratings")
+    public List<ModelRating> getRatings() {
+        return ratings;
+    }
+
+    @PropertyName("ratings")
+    public void setRatings(List<ModelRating> ratings) {
+        this.ratings = ratings;
     }
 }

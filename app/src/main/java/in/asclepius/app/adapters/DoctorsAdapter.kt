@@ -59,6 +59,16 @@ class DoctorsAdapter(
             if (doctor.rating <= 0) {
                 holder.binding.doctorRating.text = "No Ratings Yet"
             }
+
+            holder.binding.locationCard.visibility = View.VISIBLE
+            holder.binding.distanceCard.visibility = View.VISIBLE
+            holder.binding.distance.text = doctor.distance.toString() + " km "
+            holder.binding.locationText.text = doctor.hospital;
+
+
+        } else {
+            holder.binding.locationCard.visibility = View.GONE
+            holder.binding.distanceCard.visibility = View.GONE
         }
 
     }

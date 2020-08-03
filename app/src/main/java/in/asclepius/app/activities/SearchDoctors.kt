@@ -4,8 +4,8 @@ import `in`.asclepius.app.`interface`.OnDoctorSelectedCallback
 import `in`.asclepius.app.adapters.DoctorsAdapter
 import `in`.asclepius.app.databinding.ActivitySearchDoctorsBinding
 import `in`.asclepius.app.models.Doctors
+import `in`.asclepius.app.models.LocationClass
 import `in`.asclepius.app.models.ModelDoctorFirebase
-import android.location.Location
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -124,11 +124,13 @@ class SearchDoctors : AppCompatActivity() {
 
 
         binding.showingResultText.visibility = View.VISIBLE
-        binding.showingResultText.text = "Showing results for search query : $name"
+
 
 
         if (doctorsList.size > 0) {
 
+            binding.showingResultText.text =
+                "Showing results for search query : $name\nMatching Results Found : " + doctorsList.size
 
             val rvAdapter =
                 DoctorsAdapter(this, doctorsList.toTypedArray(), object : OnDoctorSelectedCallback {
@@ -138,7 +140,7 @@ class SearchDoctors : AppCompatActivity() {
                 }, true)
 
             binding.showingResultText.text =
-                "Showing results for search query : $name\n ${doctorsList.size}"
+                "Showing results for search query : $name\nMatching Results Found : ${doctorsList.size}"
 
             binding.noResult.root.visibility = View.GONE
             binding.loadingView.root.visibility = View.GONE
@@ -161,7 +163,7 @@ class SearchDoctors : AppCompatActivity() {
 
         if (doctorsList.size > 0) {
             for (doctor in doctorsList) {
-                val tempDoc = Doctors(doctor)
+                val tempDoc = Doctors(doctor, LocationClass(15.3494861, 75.1080376))
                 modelList.add(tempDoc)
             }
 
@@ -187,18 +189,5 @@ class SearchDoctors : AppCompatActivity() {
 
     }
 
-    fun distance(start: Location, end: Location): Double {
-        try {
-            val location1 = Location("locationA")
-            location1.latitude = start.latitude
-            location1.longitude = start.longitude
-            val location2 = Location("locationB")
-            location2.latitude = end.latitude
-            location2.longitude = end.longitude
-            return location1.distanceTo(location2).toDouble()
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-        }
-        return 0.0;
-    }
+
 }

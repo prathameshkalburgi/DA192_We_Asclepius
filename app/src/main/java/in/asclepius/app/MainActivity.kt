@@ -1,13 +1,17 @@
 package `in`.asclepius.app
 
+import `in`.asclepius.app.`interface`.RateCallback
 import `in`.asclepius.app.activities.BookAppointment
 import `in`.asclepius.app.activities.BookTeleconsultation
 import `in`.asclepius.app.activities.ManageAppointment
 import `in`.asclepius.app.activities.SearchDoctors
 import `in`.asclepius.app.dailogs.LoadingDialog
+import `in`.asclepius.app.dailogs.RatingDailog
 import `in`.asclepius.app.databinding.ActivityMainBinding
 import `in`.asclepius.app.databinding.AppointmentCardBinding
+import `in`.asclepius.app.models.Doctors
 import `in`.asclepius.app.models.ModelAppointment
+import `in`.asclepius.app.models.ModelRating
 import `in`.asclepius.app.others.Constants
 import `in`.asclepius.app.others.SharedPrefsManager
 import android.content.Context
@@ -66,6 +70,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SearchDoctors::class.java))
         })
 
+        RatingDailog(this, Doctors(), object : RateCallback {
+            override fun rateDoctor(doctor: Doctors, rating: ModelRating) {
+                addRating(doctor, rating)
+            }
+        }).show()
+
+    }
+
+    private fun addRating(doctor: Doctors, rating: ModelRating) {
+        val reference = FirebaseDatabase.getInstance().getReference("")
     }
 
     private fun setUpComingAppointments() {

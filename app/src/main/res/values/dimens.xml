@@ -14,5 +14,6 @@
     <dimen name="selected_edit_icon_size">25dp</dimen>
     <dimen name="book_appointment_card_radius">5dp</dimen>
     <dimen name="very_large_padding">32dp</dimen>
+    <dimen name="feature_dimen">12sp</dimen>
 
 </resources>

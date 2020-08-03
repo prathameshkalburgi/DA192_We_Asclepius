@@ -58,7 +58,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/experienceCard"
@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:padding="4dp"
                         android:text="@string/age"
-                        android:textAppearance="@style/TextAppearance.Custom.Subtitle2"
+                        android:textSize="@dimen/feature_dimen"
                         android:textColor="@color/white" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -82,7 +82,6 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/ratingCard"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="@dimen/standard_padding"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/standard_padding"
                     android:layout_marginRight="@dimen/standard_padding"
@@ -94,12 +93,83 @@
                         android:layout_height="wrap_content"
                         android:padding="4dp"
                         android:text="@string/age"
-                        android:textAppearance="@style/TextAppearance.Custom.Subtitle2"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/feature_dimen" />
 
                 </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/locationCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="@dimen/standard_padding"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="@dimen/standard_padding"
+                app:cardBackgroundColor="#B94E4C4C"
+                app:cardCornerRadius="@dimen/standard_padding">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_baseline_location_on_24"
+                        android:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/locationText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="@string/age"
+                        android:textSize="@dimen/feature_dimen"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/distanceCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/standard_padding"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="@dimen/standard_padding"
+                app:cardBackgroundColor="#B9000000"
+                app:cardCornerRadius="@dimen/standard_padding">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_baseline_swap_horiz_24"
+                        android:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="@string/age"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/feature_dimen" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
