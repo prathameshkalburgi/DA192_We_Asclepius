@@ -3,15 +3,95 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".activities.SearchDoctors">
 
-
     <include
         android:id="@+id/toolbarCard"
-        layout="@layout/toolbar_card"
         android:layout_width="match_parent"
+        layout="@layout/toolbar_card"
         android:layout_height="wrap_content" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/searchBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp">
+
+                    <EditText
+                        android:id="@+id/search_edit_Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimaryLight"
+                        android:gravity="center_vertical"
+                        android:hint="Search By Name"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/large_padding"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/lightWhite" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <ImageView
+                    android:id="@+id/search"
+                    android:layout_width="0dp"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginLeft="@dimen/standard_padding"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_baseline_search_24" />
+
+                <ImageView
+                    android:id="@+id/cancel_search"
+                    android:layout_width="0dp"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginLeft="@dimen/standard_padding"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_baseline_close_24" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/showingResultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/standard_padding"
+        android:text="@string/bookTeleConsultation"
+        android:textAppearance="@style/TextAppearance.Custom.Subtitle2"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/noResult"
+        layout="@layout/no_active_appointments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <include
         android:id="@+id/loadingView"
@@ -23,14 +103,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/doctorsRV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <include
-        android:id="@+id/noAppointments"
-        layout="@layout/no_active_appointments"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

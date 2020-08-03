@@ -51,7 +51,7 @@
                 android:paddingBottom="@dimen/standard_padding"
                 android:text="@string/familyMemberName"
                 android:textAppearance="@style/TextAppearance.Custom.Subtitle2"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:visibility="gone" />
 
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/standard_padding"
                     android:layout_marginRight="@dimen/standard_padding"
-                    app:cardBackgroundColor="@color/colorPrimaryLight">
+                    app:cardBackgroundColor="#E91E63">
 
                     <TextView
                         android:id="@+id/experienceText"
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/standard_padding"
                     android:layout_marginRight="@dimen/standard_padding"
-                    app:cardBackgroundColor="@color/colorPrimaryLight">
+                    app:cardBackgroundColor="#4759F8">
 
                     <TextView
                         android:id="@+id/doctorRating"
@@ -98,7 +98,6 @@
                         android:textColor="@color/white" />
 
                 </com.google.android.material.card.MaterialCardView>
-
 
             </LinearLayout>
 

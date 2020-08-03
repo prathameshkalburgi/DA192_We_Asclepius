@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:id="@+id/emptyMessage"
         android:padding="@dimen/large_padding"
         android:text="@string/noAppointmentMade"
         android:textAppearance="@style/TextAppearance.Custom.Body1" />

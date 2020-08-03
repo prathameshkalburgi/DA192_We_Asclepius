@@ -207,7 +207,7 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
                     doctorSelected = doctor
                     setDoctorSelected()
                 }
-            })
+            }, false)
 
         binding.selectDoctor.doctorsRV.layoutManager = LinearLayoutManager(this)
         binding.selectDoctor.doctorsRV.adapter = doctorsAdapter

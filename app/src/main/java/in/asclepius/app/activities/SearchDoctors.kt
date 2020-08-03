@@ -5,9 +5,13 @@ import `in`.asclepius.app.adapters.DoctorsAdapter
 import `in`.asclepius.app.databinding.ActivitySearchDoctorsBinding
 import `in`.asclepius.app.models.Doctors
 import `in`.asclepius.app.models.ModelDoctorFirebase
+import android.location.Location
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -28,14 +32,61 @@ class SearchDoctors : AppCompatActivity() {
         binding = ActivitySearchDoctorsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.loadingView.title.text = "Loading..."
-
         getAndSetDoctors()
 
+        binding.search.setOnClickListener(View.OnClickListener {
+            searchForDoctors()
+        })
+
+        binding.searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                searchForDoctors()
+            }
+
+        })
+
+        binding.cancelSearch.setOnClickListener(View.OnClickListener {
+            binding.searchEditText.setText("")
+            setAdapter()
+        })
+
+    }
+
+    private fun searchForDoctors() {
+        if (modelList.size >= 0) {
+            val doctorName = binding.searchEditText.text.toString()
+            if (doctorName.isNotEmpty()) {
+                val filteredByNameDocs = Doctors.filterDoctorsByName(modelList, doctorName)
+                setAdapter(filteredByNameDocs, doctorName)
+                binding.search.visibility = View.GONE
+                binding.cancelSearch.visibility = View.VISIBLE
+
+            } else {
+                setAdapter()
+                binding.showingResultText.visibility = View.GONE
+                binding.search.visibility = View.VISIBLE
+                binding.cancelSearch.visibility = View.GONE
+                Toast.makeText(this, "Please Enter Doctor Name", Toast.LENGTH_SHORT).show()
+            }
+
+        } else {
+            Toast.makeText(this, "Please Wait...", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
     private fun showNoDoctors() {
-        TODO("Not yet implemented")
+        binding.noResult.root.visibility = View.VISIBLE
+        binding.noResult.emptyMessage.text =
+            "No matching doctors found.Try changing search query or filters"
     }
 
     private fun getAndSetDoctors() {
@@ -69,6 +120,41 @@ class SearchDoctors : AppCompatActivity() {
 
     }
 
+    private fun setAdapter(doctorsList: MutableList<Doctors>, name: String) {
+
+
+        binding.showingResultText.visibility = View.VISIBLE
+        binding.showingResultText.text = "Showing results for search query : $name"
+
+
+        if (doctorsList.size > 0) {
+
+
+            val rvAdapter =
+                DoctorsAdapter(this, doctorsList.toTypedArray(), object : OnDoctorSelectedCallback {
+                    override fun onDoctorSelected(doctor: Doctors) {
+
+                    }
+                }, true)
+
+            binding.showingResultText.text =
+                "Showing results for search query : $name\n ${doctorsList.size}"
+
+            binding.noResult.root.visibility = View.GONE
+            binding.loadingView.root.visibility = View.GONE
+
+            with(binding.doctorsRV)
+            {
+                layoutManager =
+                    androidx.recyclerview.widget.LinearLayoutManager(this@SearchDoctors)
+                adapter = rvAdapter
+            }
+        } else {
+            showNoDoctors()
+        }
+
+    }
+
     private fun setAdapter() {
 
         modelList.clear()
@@ -84,9 +170,9 @@ class SearchDoctors : AppCompatActivity() {
                     override fun onDoctorSelected(doctor: Doctors) {
 
                     }
-                })
+                }, true)
 
-            binding.noAppointments.root.visibility = View.GONE
+            binding.noResult.root.visibility = View.GONE
             binding.loadingView.root.visibility = View.GONE
 
             with(binding.doctorsRV)
@@ -99,5 +185,20 @@ class SearchDoctors : AppCompatActivity() {
             showNoDoctors()
         }
 
+    }
+
+    fun distance(start: Location, end: Location): Double {
+        try {
+            val location1 = Location("locationA")
+            location1.latitude = start.latitude
+            location1.longitude = start.longitude
+            val location2 = Location("locationB")
+            location2.latitude = end.latitude
+            location2.longitude = end.longitude
+            return location1.distanceTo(location2).toDouble()
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+        return 0.0;
     }
 }

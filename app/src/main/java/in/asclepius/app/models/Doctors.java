@@ -5,6 +5,7 @@ import android.util.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Doctors {
 
@@ -21,6 +22,9 @@ public class Doctors {
     public Doctors(@NotNull ModelDoctorFirebase doctor) {
         name = doctor.getFullName();
         availableOn = "Monday";
+        rating = doctor.getRating();
+        speciality = doctor.getSpeciality();
+        fullName = doctor.getFullName();
     }
 
     public String getExperience() {
@@ -111,4 +115,26 @@ public class Doctors {
         return tempList.toArray(new Doctors[0]);
     }
 
+    @NotNull
+    public static List<Doctors> filterDoctorsByName(@NotNull List<Doctors> modelList, @NotNull String doctorName) {
+        ArrayList<Doctors> doctors = new ArrayList<>();
+        Log.d("DoctorFilter", "data : to search " + doctorName);
+        for (int i = 0; i < modelList.size(); i++) {
+            try {
+                Log.d("DoctorFilter", "Comparing : " + modelList.get(i).getFullName().toLowerCase() + " result -> " + modelList.get(i).getFullName().toLowerCase().contains(doctorName.toLowerCase()));
+                if (modelList.get(i).getFullName() != null) {
+                    if (modelList.get(i).getFullName().toLowerCase().contains(doctorName.toLowerCase())) {
+                        doctors.add(modelList.get(i));
+
+                    }
+                }
+
+            } catch (Exception e) {
+                Log.e("DoctorFilter", "Error while filtering: " + e);
+            }
+
+        }
+
+        return doctors;
+    }
 }

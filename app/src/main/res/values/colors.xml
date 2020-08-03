@@ -12,4 +12,6 @@
     <color name="errorColor">#BFFF4E4E</color>
     <color name="colorPrimaryLight">#A300827F</color>
     <color name="green">#40BD12</color>
+    <color name="ratingBg">#838282</color>
+    <color name="lightWhite">#BCECE7E6</color>
 </resources>

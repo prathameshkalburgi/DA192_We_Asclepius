@@ -56,8 +56,10 @@ class DoctorsAdapter(
         if (isFromSearchDoctors) {
             holder.binding.speciality.text = doctor.speciality
             holder.binding.speciality.visibility = View.VISIBLE
+            if (doctor.rating <= 0) {
+                holder.binding.doctorRating.text = "No Ratings Yet"
+            }
         }
-
 
     }
 }
