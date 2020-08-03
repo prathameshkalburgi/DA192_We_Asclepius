@@ -194,7 +194,7 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
+           <!-- <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/standard_padding"
@@ -215,7 +215,7 @@
                         android:layout_toLeftOf="@id/feature_img4"
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/standard_padding"
-                        android:text="@string/checkLabReports"
+                        android:text="@string/emergency"
                         android:textAppearance="@style/TextAppearance.Custom.Headline7"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -229,7 +229,7 @@
 
                 </RelativeLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>-->
 
         </LinearLayout>
 

@@ -134,5 +134,6 @@
     <string name="feature_dimen">12sp</string>
     <string name="comment">Write your review here</string>
     <string name="search_doctors">Search Doctors</string>
+    <string name="emergency">Call Nearest Hospital</string>
 
 </resources>

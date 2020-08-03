@@ -103,8 +103,6 @@ class DoctorsAdapter(
                     holder.binding.ratingLayout.visibility = View.VISIBLE
                 }
 
-
-
             } else {
                 holder.binding.ratingLayout.visibility = View.GONE
             }
