@@ -178,7 +178,7 @@
                         android:layout_toLeftOf="@id/feature_img3"
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/standard_padding"
-                        android:text="@string/search_hospitals"
+                        android:text="@string/search_doctors"
                         android:textAppearance="@style/TextAppearance.Custom.Headline7"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -189,7 +189,6 @@
                         android:layout_height="@dimen/feature_card_height"
                         android:layout_alignParentEnd="true"
                         android:src="@drawable/search_hospitals" />
-
 
                 </RelativeLayout>
 
@@ -228,11 +227,9 @@
                         android:layout_alignParentEnd="true"
                         android:src="@drawable/lab_reports" />
 
-
                 </RelativeLayout>
 
             </com.google.android.material.card.MaterialCardView>
-
 
         </LinearLayout>
 
@@ -284,15 +281,11 @@
                         android:orientation="vertical"
                         android:padding="@dimen/standard_padding">
 
-
                     </LinearLayout>
-
 
                 </ScrollView>
 
-
             </com.google.android.material.card.MaterialCardView>
-
 
         </LinearLayout>
 

@@ -3,6 +3,7 @@ package in.asclepius.app.models;
 import android.util.Log;
 
 import com.google.firebase.database.PropertyName;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,6 +27,7 @@ public class Doctors {
     private int distance;
     private List<ModelRating> ratings;
 
+
     public Doctors(@NotNull ModelDoctorFirebase doctor, LocationClass userLocation) {
         name = doctor.getFullName();
         availableOn = "Monday";
@@ -35,12 +37,26 @@ public class Doctors {
         hospital = doctor.getHospital();
         location = doctor.getLocation();
 
+        int count = 0;
+        double sum = 0;
+
         if (doctor.getRatings() != null) {
+
             Iterator it = doctor.getRatings().entrySet().iterator();
+
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
-                // ratings.add(rating)
-                ratings.add((ModelRating) pair.getValue());
+                Object object = pair.getValue();
+                ModelRating tempRate = new ModelRating(object);
+                Gson gson = new Gson();
+                ratings = new ArrayList<>();
+                ratings.add(tempRate);
+                count++;
+                sum = (sum + tempRate.getRating());
+            }
+
+            if (sum >= 0) {
+                rating = (float) (sum / count);
             }
         }
 

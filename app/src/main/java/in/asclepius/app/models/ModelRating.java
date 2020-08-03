@@ -7,7 +7,6 @@ public class ModelRating {
     private double rating;
     private AppUser ratedBy;
     private String ratedOn;
-
     private String description;
 
     public ModelRating(double rating, AppUser ratedBy, String ratedOn, String description) {
@@ -17,6 +16,17 @@ public class ModelRating {
         this.description = description;
     }
 
+    public ModelRating() {
+
+    }
+
+    public ModelRating(Object object) {
+        ModelRating temp = (ModelRating) object;
+        this.ratedBy = ((ModelRating) object).getRatedBy();
+        this.ratedOn = ((ModelRating) object).ratedOn;
+        this.description = ((ModelRating) object).description;
+        this.rating = ((ModelRating) object).rating;
+    }
 
     @PropertyName("rating")
     public double getRating() {

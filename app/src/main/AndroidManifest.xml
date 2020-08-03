@@ -23,7 +23,9 @@
         <activity android:name=".activities.BookAppointment" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.CreateAccount" />
-        <activity android:name=".activities.OnBoardActivity" />
+        <activity android:name=".activities.OnBoardActivity">
+
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

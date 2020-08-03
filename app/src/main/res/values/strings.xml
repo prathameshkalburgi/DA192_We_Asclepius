@@ -133,5 +133,6 @@
     <string name="online_successfull_message">Your request has been sent to the doctor. You will get the reply back from doctor as soon as possible</string>
     <string name="feature_dimen">12sp</string>
     <string name="comment">Write your review here</string>
+    <string name="search_doctors">Search Doctors</string>
 
 </resources>

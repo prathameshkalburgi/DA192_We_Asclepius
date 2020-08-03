@@ -1,18 +1,14 @@
 package `in`.asclepius.app
 
-import `in`.asclepius.app.`interface`.RateCallback
 import `in`.asclepius.app.activities.BookAppointment
 import `in`.asclepius.app.activities.BookTeleconsultation
 import `in`.asclepius.app.activities.ManageAppointment
 import `in`.asclepius.app.activities.SearchDoctors
 import `in`.asclepius.app.dailogs.LoadingDialog
-import `in`.asclepius.app.dailogs.RatingDailog
 import `in`.asclepius.app.databinding.ActivityMainBinding
 import `in`.asclepius.app.databinding.AppointmentCardBinding
 import `in`.asclepius.app.models.AppUser
-import `in`.asclepius.app.models.Doctors
 import `in`.asclepius.app.models.ModelAppointment
-import `in`.asclepius.app.models.ModelRating
 import `in`.asclepius.app.others.Constants
 import `in`.asclepius.app.others.SharedPrefsManager
 import android.content.Context
@@ -20,12 +16,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -78,40 +72,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SearchDoctors::class.java))
         })
 
-        RatingDailog(this, Doctors(), object : RateCallback {
+       /* RatingDailog(this, Doctors(), object : RateCallback {
             override fun rateDoctor(doctor: Doctors, rating: ModelRating) {
                 addRating(doctor, rating)
             }
-        }).show()
+        }).show() */
 
         setSelfCard()
 
     }
 
-    private fun addRating(doctor: Doctors, rating: ModelRating) {
 
-        loadingDailog = LoadingDialog(this);
-        loadingDailog.show()
-        loadingDailog.setTitle("Posting rating...")
-        val reference = FirebaseDatabase.getInstance().getReference(Constants.APP_DOCTORS_REF)
-        rating.ratedBy = signedInUser
-        reference.child("1").child("ratings").child(
-            Random.nextInt(0, 656655)
-                .toString()
-        ).setValue(rating)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Successfully Posted Rating", Toast.LENGTH_SHORT).show()
-                loadingDailog.dismiss()
-            }
-            .addOnFailureListener {
-                loadingDailog.dismiss()
-                Toast.makeText(
-                    this,
-                    getString(R.string.something_went_wrong_try_again_later),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-    }
 
     private fun setUpComingAppointments() {
 

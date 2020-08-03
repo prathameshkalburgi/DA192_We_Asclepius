@@ -162,6 +162,10 @@ class BookTeleconsultation : AppCompatActivity(), View.OnClickListener {
                     doctorSelected = doctor
                     setDoctorSelected()
                 }
+
+                override fun onRateDoctor(doctor: Doctors) {
+
+                }
             }, false)
 
         binding.selectDoctor.doctorsRV.layoutManager = LinearLayoutManager(this)

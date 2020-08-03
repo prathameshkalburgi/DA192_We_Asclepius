@@ -44,6 +44,8 @@ class RatingDailog(
                     )
                 )
 
+                dismiss()
+
 
             }
         })

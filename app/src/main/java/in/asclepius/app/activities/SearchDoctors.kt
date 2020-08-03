@@ -1,11 +1,14 @@
 package `in`.asclepius.app.activities
 
+import `in`.asclepius.app.R
 import `in`.asclepius.app.`interface`.OnDoctorSelectedCallback
+import `in`.asclepius.app.`interface`.RateCallback
 import `in`.asclepius.app.adapters.DoctorsAdapter
+import `in`.asclepius.app.dailogs.LoadingDialog
+import `in`.asclepius.app.dailogs.RatingDailog
 import `in`.asclepius.app.databinding.ActivitySearchDoctorsBinding
-import `in`.asclepius.app.models.Doctors
-import `in`.asclepius.app.models.LocationClass
-import `in`.asclepius.app.models.ModelDoctorFirebase
+import `in`.asclepius.app.models.*
+import `in`.asclepius.app.others.Constants
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -21,11 +24,14 @@ import com.google.firebase.database.ValueEventListener
 
 class SearchDoctors : AppCompatActivity() {
 
+    private lateinit var ratingDailog: RatingDailog
+    lateinit var loadingDailog: LoadingDialog
     private val dbReference = FirebaseDatabase.getInstance().getReference("app_doctors")
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private val doctorsList: MutableList<ModelDoctorFirebase> = mutableListOf()
     private val modelList: MutableList<Doctors> = mutableListOf()
     lateinit var binding: ActivitySearchDoctorsBinding
+    private lateinit var signedInUser: AppUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,15 +108,12 @@ class SearchDoctors : AppCompatActivity() {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (children in snapshot.children) {
-                        try {
+
                             Log.d("ManageAppointmentClass", "children - > " + children.getValue())
                             val appointment = children.getValue(ModelDoctorFirebase::class.java)!!
                             doctorsList.add(appointment)
                             setAdapter()
-                        } catch (e: Exception) {
-                            Log.d("ManageAppointmentClass", "DBError : $e")
-                            showNoDoctors()
-                        }
+
 
                     }
                 }
@@ -134,6 +137,10 @@ class SearchDoctors : AppCompatActivity() {
                 DoctorsAdapter(this, doctorsList.toTypedArray(), object : OnDoctorSelectedCallback {
                     override fun onDoctorSelected(doctor: Doctors) {
 
+                    }
+
+                    override fun onRateDoctor(doctor: Doctors) {
+                        submitRecord(doctor)
                     }
                 }, true)
 
@@ -170,6 +177,10 @@ class SearchDoctors : AppCompatActivity() {
                     override fun onDoctorSelected(doctor: Doctors) {
 
                     }
+
+                    override fun onRateDoctor(doctor: Doctors) {
+                        submitRecord(doctor)
+                    }
                 }, true)
 
             binding.noResult.root.visibility = View.GONE
@@ -187,5 +198,40 @@ class SearchDoctors : AppCompatActivity() {
 
     }
 
+    private fun submitRecord(doctor: Doctors) {
+        ratingDailog = RatingDailog(this, doctor, object : RateCallback {
+            override fun rateDoctor(doctor: Doctors, rating: ModelRating) {
+                addRating(doctor, rating)
+            }
+        });
+
+        ratingDailog.show()
+    }
+
+    private fun addRating(doctor: Doctors, rating: ModelRating) {
+        loadingDailog = LoadingDialog(this);
+        loadingDailog.show()
+        loadingDailog.setTitle("Posting rating...")
+        val reference = FirebaseDatabase.getInstance().getReference(Constants.APP_DOCTORS_REF)
+        rating.ratedBy = signedInUser
+
+        firebaseUser?.uid?.let {
+            reference.child(doctor.specialityId.toString()).child("ratings").child(
+                it
+            ).setValue(rating)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Successfully Posted Rating", Toast.LENGTH_SHORT).show()
+                    loadingDailog.dismiss()
+                }
+                .addOnFailureListener {
+                    loadingDailog.dismiss()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.something_went_wrong_try_again_later),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+        }
+    }
 
 }

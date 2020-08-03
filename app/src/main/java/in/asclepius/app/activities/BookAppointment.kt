@@ -207,6 +207,10 @@ class BookAppointment : AppCompatActivity(), View.OnClickListener {
                     doctorSelected = doctor
                     setDoctorSelected()
                 }
+
+                override fun onRateDoctor(doctor: Doctors) {
+                    TODO("Not yet implemented")
+                }
             }, false)
 
         binding.selectDoctor.doctorsRV.layoutManager = LinearLayoutManager(this)

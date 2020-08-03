@@ -6,10 +6,14 @@ import `in`.asclepius.app.databinding.DoctorsCardBinding
 import `in`.asclepius.app.databinding.UserRatingCardBinding
 import `in`.asclepius.app.models.Doctors
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 
 class DoctorsAdapter(
     private val context: Context,
@@ -18,6 +22,9 @@ class DoctorsAdapter(
     private val isFromSearchDoctors: Boolean
 ) :
     RecyclerView.Adapter<DoctorsAdapter.ViewHolder>() {
+
+    private val user = FirebaseAuth.getInstance().currentUser
+
 
     private var selectedDoctor: Doctors? = null
         set(value) {
@@ -35,6 +42,10 @@ class DoctorsAdapter(
 
     override fun getItemCount(): Int {
         return doctors.size
+    }
+
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -66,6 +77,8 @@ class DoctorsAdapter(
             holder.binding.distance.text = doctor.distance.toString() + " km "
             holder.binding.locationText.text = doctor.hospital
 
+            holder.binding.ratingsContiner.removeAllViews();
+            holder.binding.extraIcons.visibility = View.VISIBLE
 
             if (doctor.ratings != null) {
                 for (rating in doctor.ratings) {
@@ -74,23 +87,55 @@ class DoctorsAdapter(
                     val ratingView = inflater.inflate(
                         R.layout.user_rating_card,
                         holder.binding.ratingsContiner,
-                        true
+                        false
                     )
-                    val bindedView = UserRatingCardBinding.bind(ratingView)
+                    if (user != null) {
+                        if (user.displayName == rating.ratedBy.fullName) {
+                            holder.binding.rateDoctor.visibility = View.GONE
+                        }
+                    }
 
+                    val bindedView = UserRatingCardBinding.bind(ratingView)
                     bindedView.ratedBy.text = rating.ratedBy.fullName
                     bindedView.ratingView.rating = rating.rating.toFloat()
                     holder.binding.ratingsContiner.addView(bindedView.root)
+                    holder.binding.ratingLayout.visibility = View.VISIBLE
                 }
 
-                holder.binding.ratingLayout.visibility = View.VISIBLE
+                holder.binding.rateDoctor.setOnClickListener(View.OnClickListener {
+                    callback.onRateDoctor(doctor)
+                })
+
+
+            } else {
+                holder.binding.ratingLayout.visibility = View.GONE
             }
 
+
+            holder.binding.viewLocation.setOnClickListener(View.OnClickListener {
+                try {
+                    val gmmIntentUri =
+                        Uri.parse("geo:0,0?q=${doctor.location.lat},${doctor.location.longitude},(${doctor.hospital})");
+                    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                    mapIntent.setPackage("com.google.android.apps.maps")
+                    context.startActivity(mapIntent)
+                } catch (e: Exception) {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.something_went_wrong_try_again_later),
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }
+            })
 
         } else {
             holder.binding.locationCard.visibility = View.GONE
             holder.binding.distanceCard.visibility = View.GONE
+            holder.binding.extraIcons.visibility = View.GONE
         }
 
     }
+
+
 }

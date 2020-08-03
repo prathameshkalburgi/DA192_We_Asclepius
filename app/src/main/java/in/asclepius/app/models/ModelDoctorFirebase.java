@@ -16,7 +16,7 @@ public class ModelDoctorFirebase {
     private int specialityId;
     private String speciality;
     private LocationClass location;
-    private HashMap<String, Object> ratings;
+    private HashMap<String, ModelRating> ratings;
 
     public ModelDoctorFirebase() {
 
@@ -115,12 +115,12 @@ public class ModelDoctorFirebase {
     }
 
     @PropertyName("ratings")
-    public HashMap<String, Object> getRatings() {
+    public HashMap<String, ModelRating> getRatings() {
         return ratings;
     }
 
     @PropertyName("ratings")
-    public void setRatings(HashMap<String, Object> ratings) {
+    public void setRatings(HashMap<String, ModelRating> ratings) {
         this.ratings = ratings;
     }
 
