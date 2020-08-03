@@ -3,6 +3,7 @@ package `in`.asclepius.app
 import `in`.asclepius.app.activities.BookAppointment
 import `in`.asclepius.app.activities.BookTeleconsultation
 import `in`.asclepius.app.activities.ManageAppointment
+import `in`.asclepius.app.activities.SearchDoctors
 import `in`.asclepius.app.dailogs.LoadingDialog
 import `in`.asclepius.app.databinding.ActivityMainBinding
 import `in`.asclepius.app.databinding.AppointmentCardBinding
@@ -59,6 +60,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.bookTeleconsultation.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this, BookTeleconsultation::class.java))
+        })
+
+        binding.searchDoctors.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this, SearchDoctors::class.java))
         })
 
     }

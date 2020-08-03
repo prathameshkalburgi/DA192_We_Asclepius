@@ -57,7 +57,6 @@ class AppointmentsAdapter(
             holder.binding.statusText.text = "Request Sent To Doctor"
         }
 
-
     }
 
 }

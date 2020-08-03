@@ -1,5 +1,6 @@
 package in.asclepius.app.models;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
@@ -105,11 +106,14 @@ public class ModelAppointment {
     }
 
     @NotNull
+    @Exclude
     public String getData() {
         return "Patient Name : " + patient.getFullName() + "\nAge : " + patient.getAge() + "\nBooked by : " + bookedBy.getFullName() + "\nStatus : " + status + "\n" + "Date : " + bookingDate;
     }
 
+
     @NotNull
+    @Exclude
     public String getDataForUser() {
         if (!isOnlineConsultation) {
             return "Patient Name : " + patient.getFullName() + "\nAge : " + patient.getAge() + "\n" + "Date : " + bookingDate + "\nAppointment Id : " +

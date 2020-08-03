@@ -16,10 +16,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.*
 
 
@@ -49,36 +49,27 @@ class ManageAppointment : AppCompatActivity() {
         appointmentList.clear()
 
         firebaseUser?.uid?.let {
-            dbReference.child(it).addChildEventListener(object : ChildEventListener {
+            dbReference.child(it).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
 
                 }
 
-                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-
-                }
-
-                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-
-                }
-
-                override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-
-                    Log.d("ManageAppointment", "Appointments : " + snapshot.getValue())
-                    try {
-                        val appointment = snapshot.getValue(ModelAppointment::class.java)!!
-                        if (appointment.status == "Active") {
-                            appointmentList.add(snapshot.getValue(ModelAppointment::class.java)!!)
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (children in snapshot.children) {
+                        try {
+                            Log.d("ManageAppointmentClass", "children - > " + children.getValue())
+                            val appointment = children.getValue(ModelAppointment::class.java)!!
+                            if (appointment.status.equals("Active")) {
+                                appointmentList.add(appointment)
+                                setAdapter()
+                            }
+                            setAdapter()
+                        } catch (e: Exception) {
+                            Log.d("ManageAppointmentClass", "DBError : $e")
+                            showNoAppointments()
                         }
-                        setAdapter()
-                    } catch (e: Exception) {
-                        showNoAppointments()
+
                     }
-
-                }
-
-                override fun onChildRemoved(snapshot: DataSnapshot) {
-
                 }
             })
         }
@@ -89,6 +80,7 @@ class ManageAppointment : AppCompatActivity() {
     private fun setAdapter() {
 
         if (appointmentList.size > 0) {
+            binding.noAppointments.root.visibility = View.GONE
             val rvAdapter = AppointmentsAdapter(
                 appointmentList as ArrayList<ModelAppointment>,
                 this,

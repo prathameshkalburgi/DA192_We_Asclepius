@@ -159,6 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/standard_padding"
                 android:clickable="true"
+                android:id="@+id/searchDoctors"
                 android:focusable="true"
                 app:cardBackgroundColor="@color/colorAccent">
 

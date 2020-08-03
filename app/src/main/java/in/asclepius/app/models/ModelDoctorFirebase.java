@@ -1,15 +1,11 @@
 package in.asclepius.app.models;
 
-import android.util.Log;
+import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.PropertyName;
 
-import org.jetbrains.annotations.NotNull;
+@IgnoreExtraProperties
+public class ModelDoctorFirebase {
 
-import java.util.ArrayList;
-
-public class Doctors {
-
-    private String availableOn;
-    private String name;
     private String experience;
     private int fees;
     private String fullName;
@@ -18,97 +14,88 @@ public class Doctors {
     private int specialityId;
     private String speciality;
 
-    public Doctors(@NotNull ModelDoctorFirebase doctor) {
-        name = doctor.getFullName();
-        availableOn = "Monday";
+    public ModelDoctorFirebase() {
+
     }
 
+    public ModelDoctorFirebase(String experience, int fees, String fullName, String hospital, float rating, int specialityId, String speciality) {
+        this.experience = experience;
+        this.fees = fees;
+        this.fullName = fullName;
+        this.hospital = hospital;
+        this.rating = rating;
+        this.specialityId = specialityId;
+        this.speciality = speciality;
+    }
+
+    @PropertyName("experience")
     public String getExperience() {
         return experience;
     }
 
+
+    @PropertyName("experience")
     public void setExperience(String experience) {
         this.experience = experience;
     }
 
+    @PropertyName("fees")
     public int getFees() {
         return fees;
     }
 
+    @PropertyName("fees")
     public void setFees(int fees) {
         this.fees = fees;
     }
 
+    @PropertyName("fullName")
     public String getFullName() {
         return fullName;
     }
 
+    @PropertyName("fullName")
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
+    @PropertyName("hospital")
     public String getHospital() {
         return hospital;
     }
 
+    @PropertyName("hospital")
     public void setHospital(String hospital) {
         this.hospital = hospital;
     }
 
+    @PropertyName("rating")
     public float getRating() {
         return rating;
     }
 
+    @PropertyName("rating")
     public void setRating(float rating) {
         this.rating = rating;
     }
 
+    @PropertyName("specialityId")
     public int getSpecialityId() {
         return specialityId;
     }
 
+    @PropertyName("specialityId")
     public void setSpecialityId(int specialityId) {
         this.specialityId = specialityId;
     }
 
+    @PropertyName("speciality")
     public String getSpeciality() {
         return speciality;
     }
 
+    @PropertyName("speciality")
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
-
-    public String getAvailableOn() {
-        return availableOn;
-    }
-
-    public void setAvailableOn(String availableOn) {
-        this.availableOn = availableOn;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "ClassPojo [availableOn = " + availableOn + ", name = " + name + "]";
-    }
-
-    public static Doctors[] getDoctorsAvailableOnDay(Doctors[] doctors, String availableOn) {
-        ArrayList<Doctors> tempList = new ArrayList<>();
-        for (int i = 0; i < doctors.length; i++) {
-            Log.d("Doctors", "Comparing : required -> " + availableOn + " with actual : " + doctors[i].getAvailableOn());
-            if (doctors[i].getAvailableOn().equalsIgnoreCase(availableOn)) {
-                tempList.add(doctors[i]);
-            }
-        }
-        return tempList.toArray(new Doctors[0]);
-    }
-
 }

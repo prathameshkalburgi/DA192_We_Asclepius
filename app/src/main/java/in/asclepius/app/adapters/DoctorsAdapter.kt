@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 class DoctorsAdapter(
     private val context: Context,
     private val doctors: Array<Doctors>,
-    private val callback: OnDoctorSelectedCallback
+    private val callback: OnDoctorSelectedCallback,
+    private val isFromSearchDoctors: Boolean
 ) :
     RecyclerView.Adapter<DoctorsAdapter.ViewHolder>() {
 
@@ -50,8 +51,13 @@ class DoctorsAdapter(
                 strokeColor = context.resources.getColor(R.color.colorAccent)
                 strokeWidth = 3
             }
-
-
         }
+
+        if (isFromSearchDoctors) {
+            holder.binding.speciality.text = doctor.speciality
+            holder.binding.speciality.visibility = View.VISIBLE
+        }
+
+
     }
 }
